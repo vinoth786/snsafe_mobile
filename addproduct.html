@@ -1,0 +1,431 @@
+﻿<!-- 
+	Author: Sathish Thangaraj
+	Description: Product list for Admin and Customer
+-->
+<!Doctype html>
+<html lang="en">
+<head>
+	<title>Product</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="asset/materialize-css/css/materialize.min.css">
+	<link rel = "stylesheet" href = "https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link rel="stylesheet" href="asset/css/style.css">
+	  <!-- data table css -->
+	<link rel="stylesheet" href="asset/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css">
+	<link rel="stylesheet" href="asset/css/dataTables.responsive.css">
+	<style>
+		
+	</style>
+</head>
+<body>
+	<div class="row">
+		<div class="col s12 navbar-fixed nav">
+			<nav>
+				<div class="nav-wrapper">
+					<ul id="slide-out" class="side-nav">
+						<li><div class="user-view">
+							  <div class="background">
+								<img src="asset/images/user-img-background.jpg">
+							  </div>
+							  <a href="#!user"><img class="circle" src="asset/images/user.png"></a>
+							  <a href="#!name"><span class="white-text name">John Doe</span></a>
+							  <a href="#!email"><span class="white-text email">jdandturk@gmail.com</span></a>
+							</div></li>
+						<li><a href="#!"><i class="material-icons">cloud</i>First Link With Icon</a></li>
+						<li><a href="#!"><i class="material-icons">cloud</i>Second Link</a></li>
+						<li><div class="divider"></div></li>
+						<li><a class="subheader">Subheader</a></li>
+						<li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
+				   </ul>
+				   <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
+					<ul id="nav-mobile" class="left hide-on-med-and-down">
+						<li><a href="collapsible.html"><i class="fa fa-cart"></i></a></li>
+					</ul>
+				</div>
+			</nav>
+		</div>
+	</div>
+	<!-- model start-->
+<div class="modal fade in" id="defaultModal" tabindex="-1" role="dialog">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<form id="productForm" class="col s12 autocomplete="off">
+				<div class="modal-header">
+					<h4 class="modal-title" id="defaultModalLabel">Add product</h4>
+				</div>
+				<div class="modal-body">
+					<br/>
+					<br/>
+				   
+						<input type="hidden" value="logged_id" id="user_id" name="user_id"/>
+					
+		<div class="row">
+
+       		<div class="input-field col s12">
+    			<select name="user_id" id="user_id">
+     				 <option>Select User</option>
+   				</select>
+    			<label>User *</label>
+  			</div>
+  		</div>
+  		<div class="row">	
+  			<div class="input-field col s12">
+    			<select name="sel_p_group" id="sel_p_group">
+     				<option>Select product group </option>
+					<option value="new_grp">New group </option>
+   				</select>
+    			<label>Product Group *</label>
+  			</div>
+		</div>
+		<div class="row">
+        <div class="input-field col s12">
+          	<input type="hidden" value="" id="id" name="id"/> 
+			<input type="hidden" value="" id="updateV" name="updateV"/>
+			<input type="text" class="validate" name="productGroup" id="productGroup" placeholder="Enter product group *">
+        </div>
+      </div>
+      <div class="row">
+      	 
+        <div class="input-field col s6">
+          <input name="brand" id="brand"  type="text" class="validate">
+          <label for="brand">Product brand *</label>
+        </div>
+        <div class="input-field col s6">
+          <input name="model" id="model" type="text" class="validate">
+          <label for="model">Product model *</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input  name="snNumber" id="snNumber" type="text" class="validate">
+          <label for="snNumber">Product snNumber</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="altModelNo" name="altModelNo" type="text" class="validate">
+          <label for="altModelNo">Alternative model number</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+         	 <input name="description" id="description" type="text" class="validate">
+         	 <label for="description">Description</label>
+        </div>
+      </div>
+      <div class="row">
+          <div class="input-field col s6">
+          	 <input type="text" class="datepicker" id="dateBought" name="dateBought">
+            <label for="dateBought">Date Bought</label>
+          </div>
+          <div class="input-field col s6">
+           	<input type="text" class="datepicker" id="warrantyExpires" name="warrantyExpires">
+            <label for="warrantyExpires">Warranty Expires</label>
+          </div>
+       </div>
+       <div class="row">
+       		<div class="input-field col s12">
+    			<select name="usedType" id="usedType"">
+     				 <option>Select Used type</option>
+   				</select>
+    			<label>User type</label>
+  			</div>
+  	</div>
+  	      <div class="row">
+        <div class="input-field col s12">
+          <input id="buyingPrice" name="buyingPrice" type="text" class="validate">
+          <label for="buyingPrice">Buying Price</label>
+        </div>
+      </div>
+            <div class="row">
+        <div class="input-field col s12">
+          <input id="whereBought" name="whereBought" type="text" class="validate">
+          <label for="whereBought">Where bought</label>
+        </div>
+      </div>
+     <div class="row">
+      <div class="file-field input-field">
+      <div class="btn">
+        <span>File</span>
+        <input type="file" multiple>
+      </div>
+      <div class="file-path-wrapper">
+        <input class="file-path validate" type="text" placeholder="Upload product images">
+      </div>
+    </div>
+</div>
+ <div class="row">
+    <div class="file-field input-field">
+      <div class="btn">
+        <span>File</span>
+        <input type="file">
+      </div>
+      <div class="file-path-wrapper">
+        <input class="file-path validate" type="text" placeholder="Upload your product receipt">
+      </div>
+    </div>
+</div>
+ 
+				<div class="modal-footer">
+					<div class="row">
+        <div class="col s12">
+					<button type="submit" id="submitProduct" class="btn btn-success waves-effect">Submit</button>
+			</div>
+		<div class="col s12">
+					<button type="reset"   class="btn btn-danger waves-effect">Clear</button>
+			
+				</div>
+			</div>
+				</div>
+				</div>
+				</form>
+		</div>
+	</div>
+</div>
+<!-- model end-->
+
+<script type="text/javascript" src="asset/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="asset/materialize-css/js/materialize.min.js"></script>
+<script type="text/javascript" src="asset/bootstrap/js/bootstrap.min.js"></script>
+<!-- Jquery data table plugin-->
+<script type="text/javascript" src="asset/plugins/jquery-datatable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="asset/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
+<script type="text/javascript" src="asset/js/dataTables.responsive.js"></script>
+<script type="text/javascript" src="asset/js/jquery_validation.js"></script>
+
+<script>
+		//side nav bar initialization (never remove this)
+	$(".button-collapse").sideNav();
+	var productGroupID;
+	$('select').material_select();
+	$('#dateBought,#warrantyExpires').pickadate({
+		autoclose: true,
+		format: 'd-m-Y',
+		mask: '39-19-9999',
+		timepicker: false,
+		// mask:true,
+		maxDate: 0,
+		closeOnDateSelect: true,
+		onChangeDateTime: true,
+		scrollMonth: false,
+		scrollInput: false
+	});
+	//Add Product from validation
+	$('#productForm').validate({
+		rules: {
+			user_id: {
+				required: true
+			},
+			sel_p_group: {
+				required: true
+			},
+			productGroup: {
+				required: true
+			},
+			brand: {
+				required: true
+			},
+			model: {
+				required: true
+			},
+			snNumber: {
+				required: true
+			},
+			dateBought: {
+				required: true
+			},
+			buyingPrice: {
+				number: true
+			}
+		},
+		highlight: function (input) {
+			$(input).parents('.form-line').addClass('error');
+		},
+		unhighlight: function (input) {
+			$(input).parents('.form-line').removeClass('error');
+		},
+		errorPlacement: function (error, element) {
+			$(element).parents('.form-group').append(error);
+		},
+		messages: {
+			user_id: {
+				required: 'Select user'
+			},
+			sel_p_group: {
+				required: 'Select product group'
+			},
+			productGroup: {
+				required: 'Please enter your product group'
+			},
+			brand: {
+				required: 'Please enter your product brand'
+			},
+			model: {
+				required: 'Please enter your product model'
+			},
+			snNumber: {
+				required: 'Please enter your product serial number'
+			},
+			dateBought: {
+				required: 'Please choose a bought date'
+			},
+			buyingPrice: {
+				number: 'Provide number only'
+			}
+		},
+		submitHandler: function () {
+			$('#submitProduct').prop('disabled', true);
+			if ($('#updateV').val() === 'update') {
+				update();
+			} else {
+				addproduct();
+			}
+		}
+	});
+	$('.date_bought').click(function () {
+		//alert('clicked');
+		$('#dateBought').pickadate('show');
+	});
+	$('.warranty_date').click(function () {
+		//alert('clicked');
+		$('#warrantyExpires').pickadate('show');
+	});
+	$(document).ready(function () {
+		getProductgroup();
+
+	  //  $('#usedType,#user_id,#sel_p_group').selectpicker('refresh');
+
+	 /*   var sn_gen;
+		if (logged_type === 'admin') {
+			getSelectUser();
+		}*/
+		//Upload product images preview
+		$('#userFiles').change(function () {
+			$('#UploadImgs').empty();
+			imagesPreview(this, '#UploadImgs');
+		});
+		//Upload receipt image preview
+		$('#photo').change(function () {
+			$('#UploadImg').empty();
+			imagesPreview(this, '#UploadImg');
+		});
+		   // $('#user_id,#usedType,#sel_p_group').selectpicker('refresh');
+			$('.hideme').hide();
+			$('#id').val('');
+			$('#updateV').val('');
+			$('#user_id option').attr('disabled', false);
+			$('#user_id option').attr("selected", false);
+			$('#userErr').empty(); // SN number error message clear
+			$('#defaultModalLabel').text('Add product'); // Model popup title set
+			var vali = $('#productForm').validate();
+			vali.resetForm(); //Form all field validation reset
+			$('#UploadImgs,#UploadImg').empty();
+			$('#productForm')[0].reset(); //Form all field reset
+			//checkInput();
+			$('#defaultModal').modal('show'); // Model form show
+			$("#defaultModal").on('shown.bs.modal', function () {
+				$(this).find('#productGroup').focus();
+			});
+			$('#productGroup').focus();
+			$(".error").removeClass("error");
+				
+	});
+	//Add Product from validation
+	
+
+	
+	//Product add 
+	function addproduct() {
+		$('#UploadImgs,#UploadImg').empty();
+
+		var formdata = new FormData($('#productForm')[0]);
+		getProductgroup();
+		$.ajax({
+			url: 'http://rayi.in/snsafe/dev/product/addProduct',
+			type: "POST",
+			data: formdata,
+			contentType: false,
+			processData: false,
+			dataType: "JSON",
+			beforeSend: function () {
+				$('#block').show();
+				$('#submitProduct').prop('disabled', true);
+			},
+			success: function (rs) {
+				if (rs.status === true) {
+					$('#productForm')[0].reset();
+					$('#submitProduct').prop('disabled', false);
+					$('#defaultModal').modal('hide');
+					ajax_dataTable_reload();
+					alert('Product added successfully');
+					window.location.href = "http://localhost/snsafe_mobile_bitbucket/product.html";
+				}
+			},
+			error: function () {
+				alert('Error to add a product');
+			}
+	});
+}
+	
+	function getSelectUser() {
+		$('#user_id').empty().html('<option value="">Select user</option>');
+		$.ajax({
+			url: 'http://rayi.in/snsafe/dev/user/getUserList',
+			type: 'GET',
+			dataType: 'json',
+			success: function (rs) {
+				if (rs.status === true) {
+					$.each(rs.data, function (ind, row) {
+						$('#user_id').append('<option value="' + row.id + '">' + row.username + '</option>');
+					});
+				   // $('#user_id').selectpicker('refresh');
+				}
+			}
+		});
+	}
+	
+	$('#sel_p_group').change(function () {
+		if ($(this).val() === "new_grp") {
+			$('.hideme').show();
+			$(this).valid();
+			$('#productGroup').focus();
+
+		} else {
+			$('.hideme').hide();
+		}
+	}).change();
+	function getProductgroup() {
+		$('#sel_p_group').empty().html('<option value="">Select group</option><option value="new_grp">New group</option>');
+		$.ajax({
+			url:'http://localhost/snsafe_bitbucket/dev/Product/getProductGroup',
+			type: 'GET',
+			dataType: 'json',
+			success: function (rs) {
+				$.each(rs, function (ind, row) {
+					$('#sel_p_group').append('<option value="' + row.id + '">' + row.group_name + '</option>');
+				});
+			   // $('#sel_p_group').selectpicker('refresh');
+			}
+
+		});
+	}
+
+	function logout() {
+
+		$.ajax({
+			type: "POST",
+			url: "http://rayi.in/snsafe/dev/mobileapi/Mobile/logout",
+			dataType: 'json',
+			complete: function () {
+				window.location.href = "signin.html";
+			}
+		});
+	}
+	
+</script>
+
+</body>
+</html>

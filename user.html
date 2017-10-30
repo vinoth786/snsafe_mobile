@@ -1,0 +1,857 @@
+﻿<!-- 
+Author: mohanasundaram natesan
+Description: User list for Admin 
+-->
+<!Doctype html>
+<html lang="en">
+
+    <head>
+        <title>snsafe home screen</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="asset/materialize-css/css/materialize.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="asset/css/style.css">
+        <link rel="stylesheet" href="asset/bootstrap/css/bootstrap.min.css">
+        <!-- data table css -->
+        <link rel="stylesheet" href="asset/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css">
+        <link rel="stylesheet" href="asset/css/dataTables.responsive.css">
+        <link rel="stylesheet" href="asset/css/sweetalert.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+        <style>
+
+        </style>
+    </head>
+
+    <body class="user-page">
+        <div class="">
+            <div class="col s12 navbar-fixed nav">
+                <nav>
+                    <div class="nav-wrapper">
+                        <ul id="slide-out" class="side-nav">
+                            <li>
+                                <div class="user-view">
+                                    <div class="user-profile">
+                                        <img class="circle" src="asset/images/profile.png">
+                                        <div class="user-detail">
+                                            <h4 class="white-text" id="ses_name">John Doe</h4>
+                                            <p class="white-text" id="ses_mail">jonedoe@test.com</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <hr>
+                            <!-- <li><a href="#!"><i class="material-icons">cloud</i>First Link With Icon</a></li>
+                            <li><a href="#!">Second Link</a></li>
+                            <li>
+                            <div class="divider"></div>
+                            </li>
+                            <li><a class="subheader">Subheader</a></li>
+                            <li><a class="waves-effect" href="#!">Third Link With Waves</a></li> -->
+                            <div class="nav-links">
+                                <a href="profile.html" class="white-text"><img class="navimg" src="asset/images/user.png" alt=""><span class="navtitle">Profile</span></a>
+                                <a href="product.html" class="white-text"><img class="navimg" src="asset/images/product.png" alt=""><span class="navtitle">Product List</span></a>
+                                <!--<a href="device.html" class="white-text"><img class="navimg" src="asset/images/device.png" alt=""><span class="navtitle">Devices</span></a>-->
+                                <a href="finder.html" class="white-text"><img class="navimg" src="asset/images/device.png" alt=""><span class="navtitle">Lost and Found</span></a>
+                                <a href="recycle.html" class="white-text"><img class="navimg" src="asset/images/recycle.png" alt=""><span class="navtitle">Recycle</span></a>
+                                <a href="user.html" class="white-text" id="usernav"><img class="navimg" src="asset/images/user.png" alt=""><span class="navtitle">Users</span></a>
+                                <a href="orders.html" class="white-text"><img class="navimg" src="asset/images/product.png" alt=""><span class="navtitle">Order(s)</span></a>
+                                <a href="shop.html" class="white-text" id="shopnav"><img class="navimg" src="asset/images/product.png" alt=""><span class="navtitle">Shop</span></a>
+                                <a href="tagsearch.html" class="white-text"><img class="navimg" src="asset/images/user.png" alt=""><span class="navtitle">Tag Search</span></a>
+                            </div>
+
+                            <hr>
+                            <div class="nav-links">
+                                <a href="" class="white-text"><img class="navimg" src="asset/images/product.png" alt=""><span class="navtitle">Settings</span></a>
+                                <a href="#" onClick="return logout();" class="white-text"><img class="navimg" src="asset/images/device.png" alt=""><span class="navtitle">Logout</span></a>
+                            </div>
+                        </ul>
+                        <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
+                        <div class="header">
+                            <h2 style="margin-top:0px!important;">User List</h2>
+                        </div>
+                        <ul id="nav-mobile" class="left hide-on-med-and-down">
+                            <li><a href="collapsible.html"><i class="fa fa-cart"></i></a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <div class="se-pre-con"></div>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row clearfix">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="card">
+                            <div class="body">
+                                <table id="table" class="table table-bordered table-striped table-hover dataTable" style="width:100%;">
+                                    <thead>
+                                        <tr>
+                                            <th>S.No</th>
+                                            <th>User Id</th>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>Username</th>
+                                            <th>Password</th>
+                                            <th>Gender</th>
+                                            <th>Email Id</th>
+                                            <th>Telephone</th>
+                                            <th>Mobile</th>
+                                            <th>Country</th>
+                                            <th>State</th>
+                                            <th>Zipcode</th>
+                                            <th>Language</th>
+                                            <th>SN Tag</th>
+                                            <!--<th><?php echo $this->lang->line('DNA_tag'); ?></th>-->
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                                <div class="col-sm-9"></div><button type="button" class="btn btn-primary waves-effect" id="AddUser" data-toggle="tooltip" data-placement="top" title="Add User"><span class="material-icons">add</span></button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>       
+            </div>
+        </section>
+        <!-- model start-->
+        <div class="modal fade in" id="signupModal" tabindex="-1" role="dialog">
+            <div class="">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <form id="signupForm">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="defaultModalLabel">Add user</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group form-float">
+                                    <div class="form-line input-field">
+                                        <i class="material-icons prefix">person</i>
+                                        <input type="text" name="fname" id="fname" class="form-control validate">
+                                        <label class="form-label">First Name</label>
+                                    </div>
+                                </div>
+                                <div class="form-group form-float">
+                                    <div class="input-field ">
+                                        <i class="material-icons prefix">person</i>
+                                        <input type="text" name="lname" id="lname" class="form-control validate">
+                                        <label>Last Name</label>
+                                    </div>
+                                </div>
+                                <div class="form-group form-float">
+                                    <div class="input-field ">
+                                        <i class="material-icons prefix">date_range</i>
+                                        <input id="dob" type="text" class="form-control datepicker validate">
+                                        <label for="dob">DOB</label>
+                                    </div>
+                                </div>
+                                <div class="form-group form-float">
+                                    <div class="input-field">
+                                        <i class="material-icons prefix">account_circle</i>
+                                        <input type="text" name="username" id="username" class="form-control validate">
+                                        <label>Username *</label>
+                                    </div>
+                                </div>
+                                <div class="form-group form-float">
+                                    <div class="input-field">
+                                        <i class="material-icons prefix">lock</i>
+                                        <input type="password" name="password" id="password" class="form-control validate">
+                                        <label>Password *</label>
+                                    </div>
+                                </div>
+                                <div class="form-group form-float">
+                                    <div class="input-field ">
+                                        <input name="gender" type="radio" class="with-gap" id="male" value="male" />
+                                        <label for="male">Male</label>
+                                        <input name="gender" type="radio" id="female" class="with-gap" value="female" />
+                                        <label for="female">Female</label>
+                                    </div>
+                                </div>
+                                <div class="form-group form-float">
+                                    <div class="input-field">
+                                        <i class="material-icons prefix">email</i>
+                                        <input type="text" name="emailid" id="emailid" class="form-control validate">
+                                        <label>Email Id *</label>
+                                        <p id="mailErr"></p>
+                                    </div>
+                                </div>
+                                <div class="form-group form-float">
+                                    <div class="input-field">
+                                        <i class="material-icons prefix">call</i>
+                                        <input type="text" name="phone" id="phone" class="form-control validate">
+                                        <label>Telephone</label>
+                                    </div>
+                                </div>
+                                <div class="form-group form-float">
+
+                                    <div class="input-field">
+                                        <i class="material-icons prefix">phone_iphone</i><input type="text" name="mobile" id="mobile" class="form-control validate">
+                                        <label>Mobile *</label>
+                                    </div>
+                                </div>
+                                <div class="form-group form-float">
+                                    <div class="input-field">
+                                        <i class="material-icons prefix">perm_contact_calendar</i>
+                                        <textarea id="address" name="address" class="materialize-textarea form-control validate"></textarea>
+                                        <label>Address</label>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group form-float">
+                                    <div class="input-field">
+                                        <i class="material-icons prefix">place</i>
+                                        <input type="text" name="zipcode" id="zipcode" class="form-control validate">
+                                        <label>Zipcode *</label>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group form-float">
+                                    <label>Country *</label>
+                                    <div class="input-field">
+                                        <select id="country" name="country" onchange="getState(this.value);" class="browser-default">
+                                            <option value="" disabled selected>Choose your option</option>
+                                            <option value="1">Option 1</option>
+                                            <option value="2">Option 2</option>
+                                            <option value="3">Option 3</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group form-float">
+                                    <label>State *</label>
+                                    <div class="input-field">
+                                        <select id="state" name="state" class="browser-default">
+                                            <option value="">Select State</option>
+                                        </select>
+
+                                    </div>
+                                </div>
+                                <div class="form-group form-float">
+                                    <label>Language</label>
+                                    <div class="input-field">
+                                        <select id="language" name="language" class="browser-default">
+                                            <option>Select language</option>
+                                            <option value="Danish">Danish</option>
+                                            <option value="English">English</option>
+                                            <option value="German">German</option>
+                                            <option value="French">French</option>
+                                        </select>
+
+                                    </div>
+                                </div>
+                                <div class="form-group form-float">
+                                    <div class="input-field">
+                                        <i class="material-icons prefix">person</i>
+                                        <input type="text" name="sntag" id="sntag" readonly>
+                                        <label>Sn tag</label>
+                                    </div>
+                                </div>
+                                <div class="form-group form-float hide">
+                                    <div class="input-field">
+                                        <i class="material-icons prefix">call</i>
+                                        <input type="text" name="dnatag" id="dnatag">
+                                        <label>DNA Tag</label>
+                                    </div>
+
+
+                                </div>
+                                <div class="modal-footer add_user">
+                                    <button type="submit" id="submitProduct" class="btn btn-success waves-effect" value="add">Add</button>
+                                    <button type="button"   class="btn btn-danger waves-effect" data-dismiss="modal">Cancel</button>
+                                </div>
+                                <div class="modal-footer update_user">
+                                    <button type="submit" id="submitProduct" class="btn btn-success waves-effect" value="update">Update</button>
+                                    <button type="button"   class="btn btn-danger waves-effect" data-dismiss="modal">Cancel</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- model end-->
+
+        <script type="text/javascript" src="asset/js/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="asset/materialize-css/js/materialize.min.js"></script>
+        <script type="text/javascript" src="asset/bootstrap/js/bootstrap.min.js"></script>
+        <!-- Jquery data table plugin-->
+        <script type="text/javascript" src="asset/plugins/jquery-datatable/jquery.dataTables.js"></script>
+        <script type="text/javascript" src="asset/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
+        <script type="text/javascript" src="asset/js/dataTables.responsive.js"></script>
+        <script type="text/javascript" src="asset/js/jquery_validation.js"></script>
+        <script type="text/javascript" src="asset/js/sweet_alert.min.js"></script>
+        <script type="text/javascript" src="asset/js/sweetalert_dev.js"></script>
+
+
+        <script>
+                                            $(window).on('load', function () {
+                                                // Animate loader off screen
+                                                $(".se-pre-con").delay(3000).show().fadeOut("slow");
+                                            });
+                                            $(".button-collapse").sideNav();
+                                            $(document).ready(function () {
+
+                                                getUserData();
+                                                $('#AddUser').click(function () {
+                                                    $('#username').attr('readonly', false);
+                                                    // $('#signupForm')[0].reset();
+                                                    // $('#signupForm').validate().resetForm();
+                                                    $('#id').val('');
+                                                    $('#updateV').val('');
+                                                    // checkInput();
+                                                    $('#signupModal').modal('show');
+                                                    $('.update_user').addClass('hide');
+                                                    // $('#country,#state,#language').selectpicker('refresh');
+                                                    $("#signupModal").on('shown.bs.modal', function () {
+                                                        $(this).find('#fname').focus();
+                                                    });
+                                                    $(".error").removeClass("error");
+                                                });
+                                                var t = $('#table').DataTable({
+                                                    ajax: {
+                                                        url: "http://rayi.in/snsafe/dev/User/getUser",
+                                                        type: 'POST',
+                                                        dataType: 'json'
+                                                    },
+                                                    "columnDefs": [{
+                                                            "searchable": false,
+                                                            "orderable": false,
+                                                            "targets": 0
+                                                        }],
+                                                    dom: '<"pull-left"f><"pull-right"l>trip',
+                                                    responsive: true,
+                                                    processing: true,
+                                                    info: false,
+                                                    lengthChange: false,
+                                                    //serverSide: true,
+                                                    "order": [[1, 'asc']]
+                                                });
+
+                                                t.on('order.dt search.dt', function () {
+                                                    t.column(0, {search: 'applied', order: 'applied'}).nodes().each(function (cell, i) {
+                                                        cell.innerHTML = i + 1;
+                                                    });
+                                                }).draw();
+                                                $("signupForm").attr('autocomplete', 'off');
+                                                //$.datetimepicker.setLocale('en');
+                                                $('.glyphicon-calendar').click(function () {
+                                                    //alert('clicked');
+                                                    $('#dob').pickadate('show');
+                                                });
+                                                $('#dob').pickadate({
+                                                    selectMonths: true, // Creates a dropdown to control month
+                                                    selectYears: true,
+                                                    autoclose: true,
+                                                    //format: 'd-m-Y',
+                                                    mask: '39-19-9999',
+                                                    timepicker: false,
+                                                    // mask:true,
+                                                    max: true,
+                                                    noSpinbtn: true,
+                                                    scrollMonth: false,
+                                                    scrollInput: false
+
+                                                });
+                                                // $('#language').selectpicker('refresh');
+                                                // autosize($('textarea.auto-growth'));
+                                                getCountry();
+//            if (uri === 'Profile') {
+//            edit_user('<?php echo $this->logged_id; ?>', 'admin');
+//            $('#submitProduct').attr("disabled", true);
+//            }
+                                                $('#country').on('change', function () {
+                                                    var update = $('#updateV').val();
+                                                    if (update != 'update') {
+                                                        var fName = $('#fname').val();
+                                                        var sName = $('#lname').val();
+                                                        var id = $(this).val();
+                                                        var checkName = fName.substring(0, 1) + sName.substring(0, 1);
+                                                        $.ajax({
+                                                            url: 'http://rayi.in/snsafe/dev/General/checkSnTag/',
+                                                            type: 'POST',
+                                                            data: {country_id: id, tagname: checkName},
+                                                            dataType: 'json',
+                                                            success: function (rs) {
+                                                                if (rs.status === true) {
+                                                                    $('#sntag').empty().val(rs.data)
+                                                                            .parent().addClass('focused');
+                                                                } else {
+                                                                    swal({
+                                                                        title: 'Sn tag',
+                                                                        text: 'error generating sn tag',
+                                                                        type: 'error'
+                                                                    });
+                                                                }
+                                                            }
+                                                        });
+                                                    }
+                                                });
+                                                $('#editUser').click(function () {
+                                                    //$('#country,#state,#language').attr('disabled',false);
+                                                    enableFormValues();
+                                                    $('#fname').focus();
+                                                    $('#submitProduct').attr('disabled', false);
+                                                    $(this).attr('disabled', true);
+                                                });
+                                                $("#emailid").keyup(function () {
+                                                    if ($(this).val() !== '') {
+                                                        $.ajax({
+                                                            type: "POST",
+                                                            url: "http://rayi.in/snsafe/dev/Login/checkEmail/",
+                                                            data: {email: $(this).val()},
+                                                            dataType: 'json',
+                                                            success: function (obj) {
+                                                                if (obj.status === true) {
+                                                                    $('#mailErr').empty().html('Email id already Exist');
+                                                                    $('#mailErr').css({
+                                                                        'color': '#F44336', 'font-size': '12px', 'font-weight': 'normal'
+                                                                    });
+                                                                    $('#submitProduct').attr("disabled", true);
+                                                                } else {
+                                                                    $('#mailErr').empty().html('');
+                                                                    $('#mailErr').css({
+                                                                        'color': '#4CAF50'
+                                                                    });
+                                                                    $('#submitProduct').attr("disabled", false);
+                                                                }
+                                                            }
+                                                        });
+                                                    }
+                                                });
+                                                $('#username').keyup(function () {
+                                                    if ($(this).val() !== '') {
+                                                        $.ajax({
+                                                            url: 'http://rayi.in/snsafe/dev/General/checkUsername/' + $(this).val(),
+                                                            method: 'POST',
+                                                            dataType: 'json',
+                                                            success: function (rs) {
+                                                                if (rs.status === true) {
+                                                                    $('#userErr').empty().html('User already exist');
+                                                                    $('#userErr').css({
+                                                                        'color': '#F44336', 'font-size': '12px', 'font-weight': 'normal'
+                                                                    });
+                                                                    $('#submitProduct').attr("disabled", true);
+                                                                } else {
+                                                                    $('#userErr').empty().html('');
+                                                                    $('#userErr').css({
+                                                                        'color': '#4CAF50'
+                                                                    });
+                                                                    $(this).removeClass('error');
+                                                                    $('#submitProduct').attr("disabled", false);
+                                                                }
+                                                            }
+                                                        });
+                                                    } else {
+                                                        $('#userErr').empty().html('');
+                                                        $('#userErr').css({
+                                                            'color': '#4CAF50'
+                                                        });
+                                                        $(this).removeClass('error');
+                                                        $('#submitProduct').attr("disabled", false);
+                                                    }
+                                                });
+                                            });
+                                            //signup validation
+                                            $('#signupForm').validate({
+                                                rules: {
+                                                    fname: {
+                                                        required: true
+                                                    },
+                                                    lname: {
+                                                        required: true
+                                                    },
+                                                    zipcode: {
+                                                        required: true,
+                                                        number: true
+                                                    },
+                                                    mobile: {
+                                                        required: true,
+                                                        number: true
+                                                    },
+                                                    phone: {
+                                                        number: true
+                                                    },
+                                                    username: {
+                                                        required: true
+                                                                //  alphanumeric: true
+                                                    },
+                                                    emailid: {
+                                                        required: {
+                                                            depends: function () {
+                                                                $(this).val($.trim($(this).val()));
+                                                                return true;
+                                                            }
+                                                        },
+                                                        email: true
+                                                    },
+                                                    password: {
+                                                        required: {
+                                                            depends: function () {
+                                                                $(this).val($.trim($(this).val()));
+                                                                return true;
+                                                            }
+                                                        }
+                                                    },
+                                                    country: {
+                                                        required: true
+                                                    },
+                                                    state: {
+                                                        required: true
+                                                    }
+                                                },
+                                                highlight: function (input) {
+                                                    $(input).parents('.form-line').addClass('error');
+                                                },
+                                                unhighlight: function (input) {
+                                                    $(input).parents('.form-line').removeClass('error');
+                                                    $('select').parents('.form-line').removeClass('error');
+                                                },
+                                                errorPlacement: function (error, element) {
+                                                    $(element).parents('.form-group').append(error);
+                                                },
+                                                messages: {
+                                                    fname: {
+                                                        required: 'Enter first name'
+                                                    },
+                                                    lname: {
+                                                        required: 'enter last name'
+                                                    },
+                                                    zipcode: {
+                                                        required: 'Enter zipcode',
+                                                        number: 'Provide num only'
+                                                    },
+                                                    mobile: {
+                                                        required: 'Enter mobile',
+                                                        number: 'Provide num only'
+                                                    },
+                                                    phone: {
+                                                        number: 'Provide num only'
+                                                    },
+                                                    username: {
+                                                        required: 'Enter username'
+                                                                //                alphanumeric:'<?php echo $this->lang->line('alpha_numeric'); ?>'
+                                                    },
+                                                    emailid: {
+                                                        required: 'Enter email',
+                                                        email: 'Invalid email'
+                                                    },
+                                                    password: {
+                                                        required: 'Enter password'
+                                                    },
+                                                    country: {
+                                                        required: 'Select country'
+                                                    },
+                                                    state: {
+                                                        required: 'Select state'
+                                                    }
+                                                },
+                                                submitHandler: function () {
+                                                    if ($('#submitProduct').val() === 'update') {
+                                                        update();
+                                                    } else {
+                                                        addUser();
+                                                    }
+
+                                                }
+                                            });
+                                            function getCountry() {
+                                                $.ajax({
+                                                    url: 'http://rayi.in/snsafe/dev/General/getCountry',
+                                                    type: 'GET',
+                                                    dataType: 'json',
+                                                    success: function (rs) {
+                                                        if (rs.status === true) {
+                                                            $('#country').empty().html('<option value="">select country</option>');
+                                                            $.each(rs.data, function (ind, row) {
+                                                                $('#country').append('<option value="' + row.id + '">' + row.name + '</option>');
+                                                            });
+                                                            // $('#country').pickadate('refresh');
+                                                        }
+                                                    }
+                                                });
+                                            }
+                                            function getState(id) {
+                                                if (id > 0) {
+                                                    $.ajax({
+                                                        url: 'http://rayi.in/snsafe/dev/General/getState/' + id,
+                                                        type: 'GET',
+                                                        dataType: 'json',
+                                                        success: function (rs) {
+                                                            if (rs.status === true) {
+                                                                $('#state').empty().html('select state</option>');
+                                                                $.each(rs.data, function (ind, row) {
+                                                                    $('#state').append('<option value="' + row.id + '">' + row.name + '</option>');
+                                                                });
+                                                                // $('#state').pickadate("refresh");
+                                                            }
+                                                        }
+                                                    });
+                                                }
+                                            }
+                                            //Profile insert
+                                            function addUser() {
+
+                                                var formValue = new FormData($('#signupForm')[0]);
+                                                $.ajax({
+                                                    url: 'http://rayi.in/snsafe/dev/Login/signUp',
+                                                    type: "POST",
+                                                    data: formValue,
+                                                    contentType: false,
+                                                    processData: false,
+                                                    dataType: "json",
+                                                    beforeSend: function () {
+                                                        $('#block').show();
+                                                        $('#submitProduct').attr("disabled", true);
+                                                    },
+                                                    success: function (rs)
+                                                    {
+                                                        if (rs.status === true) {
+                                                            $('#signupForm')[0].reset();
+                                                            $('#signupModal').modal('hide');
+//                                                            if (uri !== 'Profile' && uType === 'admin') {
+//                                                                table.ajax.reload();
+//                                                            }
+                                                            swal('registered successfully', '', 'success');
+                                                            window.location.href = "user.html";
+                                                        }
+                                                    },
+                                                    error: function () {
+                                                        swal('rigister', 'error caused on register a data', 'error');
+                                                    },
+                                                    complete: function () {
+                                                        $('#block').hide();
+                                                        $('#submitProduct').attr("disabled", false);
+                                                    }
+                                                });
+                                            }
+                                            //Profile Update
+                                            function update() {
+                                                //var formData = new FormData($('#signupForm')[0]);
+                                                var url = "http://rayi.in/snsafe/dev/User/User_update";
+                                                var formData = new FormData($('#signupForm')[0]);
+                                                $.ajax({
+                                                    url: url,
+                                                    type: "POST",
+                                                    data: formData,
+                                                    contentType: false,
+                                                    processData: false,
+                                                    dataType: "JSON",
+                                                    beforeSend: function () {
+                                                        $('#block').show();
+                                                        $('#submitProduct').attr("disabled", true);
+                                                    },
+                                                    success: function (rs)
+                                                    {
+                                                        if (rs.status === true) {
+                                                            $('#editUser').attr("disabled", false);
+//                                                            if (uri === 'Profile') {
+//                                                                $('#submitProduct').attr("disabled", true);
+//                                                            } else {
+//                                                                ajax_dataTable_reload();
+//                                                                $('#signupModal').modal('hide');
+//                                                            }
+                                                            table.ajax.reload();
+                                                            $('input,#country,#state,#language,textarea').each(function () {
+                                                                $(this).attr('disabled', true);
+                                                                swal('updated successfully', '', 'success');
+                                                                //ajax_dataTable_reload();
+                                                                table.ajax.reload();
+                                                                // window.location.href = "user.html";
+                                                            });
+                                                            if (uri !== 'Profile' && uType === 'admin') {
+                                                                table.ajax.reload();
+                                                            }
+                                                        } else {
+                                                            swal('update profile', 'error an update', 'error');
+                                                        }
+                                                    },
+                                                    error: function ()
+                                                    {
+                                                        swal('update profile', 'error an update', 'error');
+                                                    },
+                                                    complete: function () {
+                                                        $('#block').hide();
+//                                                        if (uri !== 'Profile') {
+//                                                            $('#submitProduct').attr("disabled", false);
+//                                                        }
+                                                    }
+                                                });
+                                            }
+                                            function pass(id) {
+                                                if ($('#password_' + id).attr('type') === 'text') {
+                                                    $('#password_' + id).attr('type', 'password');
+                                                } else {
+                                                    $('#password_' + id).attr('type', 'text');
+                                                }
+                                            }
+                                            $('#country,#state').on('change', function () {
+                                                $(this).valid();
+                                            });
+                                            function delete_user(id)
+                                            {
+                                                swal({
+                                                    title: "Delete",
+                                                    text: "Are you sure delete this data??",
+                                                    type: "warning",
+                                                    showCancelButton: true,
+                                                    confirmButtonColor: "#DD6B55",
+                                                    confirmButtonText: "Yes",
+                                                    cancelButtonText: "No",
+                                                    closeOnConfirm: false,
+                                                    closeOnCancel: false
+                                                },
+                                                        function (isConfirm) {
+                                                            if (isConfirm) {
+                                                                // ajax delete data to database
+                                                                $.ajax({
+                                                                    url: "http://rayi.in/snsafe/dev/User/User_delete/" + id,
+                                                                    type: "POST",
+                                                                    dataType: "JSON",
+                                                                    success: function (data)
+                                                                    {
+                                                                        //if success reload ajax table
+                                                                        $('#signupModal').modal('hide');
+                                                                        // ajax_dataTable_reload();
+                                                                        table.ajax.reload();
+                                                                        swal('Delete', 'success', 'success');
+                                                                        window.location.href = "user.html";
+                                                                    },
+                                                                    error: function ()
+                                                                    {
+                                                                        swal('Delete', 'Something error deleting data', 'error');
+                                                                    }
+                                                                });
+                                                            } else {
+                                                                swal("Cancelled", "", "error");
+                                                            }
+                                                        });
+                                            }
+                                            function edit_user(id, type) {
+                                                $(".update_user").removeClass('hide').off("*");
+                                                $('.add_user').addClass('hide');
+                                                //$('#defaultModalLabel').html("Edit user");
+                                                $('#defaultModalLabel').html("Edit user");
+
+                                                //enableFormValues();
+                                                if (type === 'customer') {
+                                                    $('#signupModal').modal('show');
+                                                    //$('#signupForm').validate().resetForm();
+                                                }
+
+                                                $(".error").removeClass("error");
+                                                $('#id').val(id);
+                                                $('#submitProduct').val('update');
+                                                $('#username').prop('readonly', true);
+                                                $('#signupForm')[0].reset(); // reset form on modals
+                                                //Ajax Load data from ajax
+                                                $.ajax({
+                                                    url: "http://rayi.in/snsafe/dev/User/editUser/" + id,
+                                                    type: "GET",
+                                                    dataType: "JSON",
+                                                    beforeSend: function () {
+                                                        $('#block').show();
+                                                    },
+                                                    success: function (data)
+                                                    {
+                                                        $('#id').val(data[0].id);
+                                                        $('#fname').val(data[0].first_name);
+                                                        $('#lname').val(data[0].last_name);
+                                                        $('#dob').val(data[0].dob);
+                                                        $('#username').val(data[0].username);
+                                                        $('#address').val(data[0].address);
+                                                        $('#password').val(data[0].password);
+                                                        $('input[value="' + data[0].gender + '"]').prop("checked", true);
+                                                        $('#emailid').val(data[0].email);
+                                                        $('#phone').val(data[0].phone);
+                                                        $('#mobile').val(data[0].mobile);
+                                                        $('#zipcode').val(data[0].zipcode);
+                                                        $('#sntag').val(data[0].sn_tag);
+                                                        $('#dnatag').val(data[0].dna_tag);
+                                                        $.ajax({
+                                                            url: 'http://rayi.in/snsafe/dev/General/getState/' + data[0].country_id,
+                                                            type: 'GET',
+                                                            dataType: 'json',
+                                                            beforeSend: function () {
+                                                                $('#block').show();
+                                                            },
+                                                            success: function (rs) {
+                                                                if (rs.status === true) {
+                                                                    $('#state').empty().html('<option value="">select state</option>');
+                                                                    $.each(rs.data, function (ind, row) {
+                                                                        $('#state').append('<option value="' + row.id + '">' + row.name + '</option>');
+                                                                    });
+                                                                    $('#language option[value="' + data[0].language + '"]').prop('selected', true);
+                                                                    $('#country option[value="' + data[0].country_id + '"]').prop('selected', true);
+                                                                    $('#state option[value="' + data[0].state + '"]').prop('selected', true);
+                                                                    // $('#state,#country,#language').selectpicker("refresh");
+                                                                    //checkInput();
+                                                                    $('label').addClass('active');
+                                                                }
+                                                                $('#fname').focus();
+                                                            },
+                                                            complete: function () {
+                                                                $('#block').hide();
+                                                            }
+                                                        });
+                                                        //                    $('#country').selectpicker('refresh');
+                                                    },
+                                                    error: function ()
+                                                    {
+                                                        swal('Error', 'Error get data from ajax', 'error');
+                                                    }
+                                                });
+                                            }
+
+                                            function logout() {
+
+                                                $.ajax({
+                                                    type: "POST",
+                                                    url: "http://rayi.in/snsafe/dev/mobileapi/Mobile/logout",
+                                                    dataType: 'json',
+                                                    complete: function () {
+                                                        window.location.href = "index.html";
+                                                    }
+                                                });
+                                            }
+                                            function getUserData() {
+
+                                                $.ajax({
+                                                    url: 'http://rayi.in/snsafe/dev/mobileapi/Mobile/getSession',
+                                                    type: 'POST',
+                                                    dataType: 'json',
+                                                    success: function (rs) {
+
+                                                        $('#ses_name').html(rs.username);
+                                                        $('#ses_mail').html(rs.email);
+                                                        //alert(rs.id);
+                                                        var usertype = rs.user_type;
+                                                        if (usertype === 'customer') {
+                                                            // alert("am a customer");
+                                                            // alert(rs.id);
+
+                                                            $('.admin').empty();
+                                                            $('#user_id').val(rs.id);
+                                                            $('#usernav').hide();
+                                                            // $('#user_id').prop('type', 'hidden');
+
+                                                        } else {
+                                                            $('#shopnav').hide();
+                                                            // alert("am a admin");
+                                                        }
+                                                    },
+                                                    error: function () {
+                                                        alert("Please login");
+                                                        window.location.href = "index.html";
+                                                    }
+                                                });
+
+                                            }
+
+        </script>

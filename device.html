@@ -1,0 +1,181 @@
+﻿<!-- 
+    Author: mohana sundaram
+    Description: Lost and Found list for admin and Customer
+-->
+<!Doctype html>
+<html lang="en">
+
+<head>
+    <title>snsafe home screen</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="asset/materialize-css/css/materialize.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="asset/css/style.css">
+    <link rel="stylesheet" href="asset/bootstrap/css/bootstrap.min.css">
+    <!-- data table css -->
+    <link rel="stylesheet" href="asset/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css">
+    <link rel="stylesheet" href="asset/css/dataTables.responsive.css">
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div class="">
+        <div class="col s12 navbar-fixed nav">
+            <nav>
+                <div class="nav-wrapper">
+                    <ul id="slide-out" class="side-nav">
+                        <li>
+                            <div class="user-view">
+                                <div class="user-profile">
+                                    <img class="circle" src="asset/images/profile.png">
+                                    <div class="user-detail">
+                                        <h4 class="white-text">John Doe</h4>
+                                        <p class="white-text">jonedoe@test.com</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <hr>
+                        <!-- <li><a href="#!"><i class="material-icons">cloud</i>First Link With Icon</a></li>
+                        <li><a href="#!">Second Link</a></li>
+                        <li>
+                            <div class="divider"></div>
+                        </li>
+                        <li><a class="subheader">Subheader</a></li>
+                        <li><a class="waves-effect" href="#!">Third Link With Waves</a></li> -->
+                        <div class="nav-links">
+                            <a href="product.html" class="white-text"><img class="navimg" src="asset/images/product.png" alt=""><span class="navtitle">Product List</span></a>
+                            <a href="device.html" class="white-text"><img class="navimg" src="asset/images/device.png" alt=""><span class="navtitle">Devices</span></a>
+                            <a href="finder.html" class="white-text"><img class="navimg" src="asset/images/device.png" alt=""><span class="navtitle">Lost and Found</span></a>
+                            <a href="recycle.html" class="white-text"><img class="navimg" src="asset/images/recycle.png" alt=""><span class="navtitle">Recycle</span></a>
+                            <a href="user.html" class="white-text"><img class="navimg" src="asset/images/user.png" alt=""><span class="navtitle">Users</span></a>
+                            <a href="tagsearch.html" class="white-text"><img class="navimg" src="asset/images/user.png" alt=""><span class="navtitle">Tag Search</span></a>
+                        </div>
+                        
+                        <hr>
+                        <div class="nav-links">
+                            <a href="" class="white-text"><img class="navimg" src="asset/images/product.png" alt=""><span class="navtitle">Settings</span></a>
+                            <a href="http://rayi.in/snsafe/dev/mobileapi/Mobile/logout" class="white-text"><img class="navimg" src="asset/images/device.png" alt=""><span class="navtitle">Logout</span></a>
+                    </ul>
+                    <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
+                    <ul id="nav-mobile" class="left hide-on-med-and-down">
+                        <li><a href="collapsible.html"><i class="fa fa-cart"></i></a></li>
+                    </ul>
+                    </div>
+            </nav>
+            </div>
+        </div>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row clearfix">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="card">
+                            <div class="header">
+                                <h2>
+                                    Devices
+                                </h2>
+                            </div>
+                            <div class="body">
+                                <button type="button" class="btn btn-primary waves-effect" id="device1">E256</button>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>
+                                                Time
+                                            </th>
+                                            <th>
+                                                MOnitered Time
+                                            </th>
+                                            <th>
+                                                Repeat
+                                            </th>
+                                            <th>
+                                                Water
+                                            </th>
+                                            <th>
+                                                Level
+                                            </th>
+                                            <th>
+                                                Lat
+                                            </th>
+                                            <th>
+                                                Long
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- model start-->
+        <script src="http://maps.googleapis.com/maps/api/js?libraries=geometry&sensor=false"></script> 
+        <script src="http://maps.googleapis.com/maps/api/js?libraries=geometry&sensor=false"></script>
+        <script type="text/javascript" src="asset/js/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="asset/materialize-css/js/materialize.min.js"></script>
+        <script type="text/javascript" src="asset/bootstrap/js/bootstrap.min.js"></script>
+        <!-- Jquery data table plugin-->
+        <script type="text/javascript" src="asset/plugins/jquery-datatable/jquery.dataTables.js"></script>
+        <script type="text/javascript" src="asset/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
+        <script type="text/javascript" src="asset/js/dataTables.responsive.js"></script>
+    
+        <script>
+            $(".button-collapse").sideNav();
+            //Device list 
+            $(document).ready(function () {
+
+                var lat1 = "<?php echo $list1['Lat']; ?> ";
+                var lang1 = "<?php echo $list1['Lng']; ?>";
+                var lat2 = "<?php echo $pre1->Lat; ?>";
+                var lang2 = "<?php echo $pre1->Lng; ?>";
+                var rad = function (x) {
+                    return x * Math.PI / 80;
+                };
+                var R = 6378137; // Earth’s mean radius in meter
+                var dLat = rad(lat2 - lat1); // latitude radius stored dLat
+                var dLong = rad(lang2 - lang1); //  longitude radius store dLong
+                var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                    Math.cos(rad(lat1)) * Math.cos(rad(lat2)) *
+                    Math.sin(dLong / 2) * Math.sin(dLong / 2);
+                var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+                var d = google.maps.geometry.spherical.computeDistanceBetween(new google.maps.LatLng(lat1,
+                        lang1),
+                    new google.maps.LatLng(lat2, lang2));
+                var dis = Math.round(d) / 1000;
+                if (dis == 0) {
+                    var deviceList = '<?php print_r($deviceList); ?>';
+                    var e = $.parseJSON(deviceList);
+                    var style;
+                    $.each(e, function (index, row1) {
+                        if (e.length == 1) {
+                            style = 'style="background-color:red;color:white;"';
+                        }
+                        if (row1.Water == 1) {
+                            style = 'style="background-color:red;color:white;"';
+                        } else {
+                            style = 'style="background-color:green;color:white;"';
+                        }
+                        $('tbody').append('<tr ' + style + '><td scope="row">' + row1.id + '</td>' +
+                            ' <td>' + getDate(row1.Time) + '</td><td>' + row1.c_time + '</td>' +
+                            '<td>' + row1.Repeat + '</td><td>' + row1.Water + '</td><td>' + row1.Level +
+                            '</td>' +
+                            '<td>' + row1.Lat + '</td><td>' + row1.Lng + '</td></tr>');
+                    });
+                } else {}
+			});
+
+
+        </script>
+</body>
+
+</html>

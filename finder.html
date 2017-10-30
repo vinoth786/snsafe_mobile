@@ -1,0 +1,210 @@
+﻿<!-- 
+    Author: sathish
+    Description: Lost and Found list for admin and Customer
+-->
+<!Doctype html>
+<html lang="en">
+
+    <head>
+        <title>snsafe home screen</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="asset/materialize-css/css/materialize.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="asset/css/style.css">
+        <link rel="stylesheet" href="asset/bootstrap/css/bootstrap.min.css">
+        <!-- data table css -->
+        <link rel="stylesheet" href="asset/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css">
+        <link rel="stylesheet" href="asset/css/dataTables.responsive.css">
+        <style>
+            html{
+                height: 100vh;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="">
+            <div class="col s12 navbar-fixed nav">
+                <nav>
+                    <div class="nav-wrapper">
+                        <ul id="slide-out" class="side-nav">
+                            <li>
+                                <div class="user-view">
+                                    <div class="user-profile">
+                                        <img class="circle" src="asset/images/profile.png">
+                                        <div class="user-detail">
+                                            <h4 class="white-text" id="ses_name">John Doe</h4>
+                                            <p class="white-text" id="ses_mail">jonedoe@test.com</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <hr>
+                            <!-- <li><a href="#!"><i class="material-icons">cloud</i>First Link With Icon</a></li>
+                            <li><a href="#!">Second Link</a></li>
+                            <li>
+                                <div class="divider"></div>
+                            </li>
+                            <li><a class="subheader">Subheader</a></li>
+                            <li><a class="waves-effect" href="#!">Third Link With Waves</a></li> -->
+                            <div class="nav-links">
+                                <a href="profile.html" class="white-text"><img class="navimg" src="asset/images/user.png" alt=""><span class="navtitle">Profile</span></a>
+                                <a href="product.html" class="white-text"><img class="navimg" src="asset/images/product.png" alt=""><span class="navtitle">Product List</span></a>
+                                <!--<a href="device.html" class="white-text"><img class="navimg" src="asset/images/device.png" alt=""><span class="navtitle">Devices</span></a>-->
+                                <a href="finder.html" class="white-text"><img class="navimg" src="asset/images/device.png" alt=""><span class="navtitle">Lost and Found</span></a>
+                                <a href="recycle.html" class="white-text"><img class="navimg" src="asset/images/recycle.png" alt=""><span class="navtitle">Recycle</span></a>
+                                <a href="user.html" class="white-text" id="usernav"><img class="navimg" src="asset/images/user.png" alt=""><span class="navtitle">Users</span></a>
+                                <a href="orders.html" class="white-text"><img class="navimg" src="asset/images/product.png" alt=""><span class="navtitle">Order(s)</span></a>
+                                <a href="shop.html" class="white-text" id="shopnav"><img class="navimg" src="asset/images/product.png" alt=""><span class="navtitle">Shop</span></a>
+                                <a href="tagsearch.html" class="white-text"><img class="navimg" src="asset/images/user.png" alt=""><span class="navtitle">Tag Search</span></a>
+                            </div>
+
+                            <hr>
+                            <div class="nav-links">
+                                <a href="" class="white-text"><img class="navimg" src="asset/images/product.png" alt=""><span class="navtitle">Settings</span></a>
+                                <a href="#" onClick="return logout();" class="white-text"><img class="navimg" src="asset/images/device.png" alt=""><span class="navtitle">Logout</span></a>
+                        </ul>
+                        <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
+                        <div class="header">
+                            <h2>List of items Found</h2>
+                        </div>
+                        <ul id="nav-mobile" class="left hide-on-med-and-down">
+                            <li><a href="collapsible.html"><i class="fa fa-cart"></i></a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <div class="se-pre-con"></div>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row clearfix">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="card">
+                            <div class="body">
+                                <table id="table" class="table table-bordered table-striped table-hover dataTable" style="width:100%;">
+                                    <thead>
+                                        <tr>
+                                            <th>S.No</th>
+                                            <th>Product Serial number</th>
+                                            <th>Product Username</th>
+                                            <th>Finder name</th>
+                                            <th>Finder mobile number</th>
+                                            <th>finder email id</th>
+                                            <th>Finder description</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>       
+            </div>
+        </section>
+        <script type="text/javascript" src="asset/js/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="asset/materialize-css/js/materialize.min.js"></script>
+        <script type="text/javascript" src="asset/bootstrap/js/bootstrap.min.js"></script>
+        <!-- Jquery data table plugin-->
+        <script type="text/javascript" src="asset/plugins/jquery-datatable/jquery.dataTables.js"></script>
+        <script type="text/javascript" src="asset/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
+        <script type="text/javascript" src="asset/js/dataTables.responsive.js"></script>
+
+        <script>
+                                    $(document).ready(function(){
+                                        getUserData();
+                                    });
+                                    $(window).on('load', function () {
+
+                                        // Animate loader off screen
+                                        $(".se-pre-con").delay(3000).show().fadeOut("slow");
+                                    });
+                                    $(".button-collapse").sideNav();
+                                    var table = $('#table').DataTable({
+                                        dom: '<"pull-left"f><"pull-right"l>trip',
+                                        responsive: true,
+                                        processing: true, //Feature control the processing indicator.
+                                        serverSide: true, //Feature control DataTables' server-side processing mode.
+                                        order: [], //Initial no order.
+                                        info: false,
+                                        lengthChange: false,
+                                        // Load data for the table's content from an Ajax source
+                                        ajax: {
+                                            url: "http://rayi.in/snsafe/dev/Finder/getFinder",
+                                            type: "POST"
+                                        }
+
+                                    });
+
+                                    //Lost & found list data get
+                                    function finder(id) {
+                                        $.ajax({
+                                            url: "http://rayi.in/snsafe/dev/Finder/receive_product/" + id,
+                                            type: "POST",
+                                            dataType: 'json',
+                                            success: function (rs)
+                                            {
+                                                if (rs.status === true)
+                                                    $('#defaultModal').modal('hide');
+                                                getNotification();
+                                                ajax_dataTable_reload();
+
+                                            },
+                                            error: function ()
+                                            {
+                                                swal('Error', 'Something error data', 'error');
+                                            }
+                                        });
+                                    }
+
+                                    function logout() {
+
+                                        $.ajax({
+                                            type: "POST",
+                                            url: "http://rayi.in/snsafe/dev/mobileapi/Mobile/logout",
+                                            dataType: 'json',
+                                            complete: function () {
+                                                window.location.href = "index.html";
+                                            }
+                                        });
+                                    }
+                                    function getUserData() {
+
+                                        $.ajax({
+                                            url: 'http://rayi.in/snsafe/dev/mobileapi/Mobile/getSession',
+                                            type: 'POST',
+                                            dataType: 'json',
+                                            success: function (rs) {
+
+                                                $('#ses_name').html(rs.username);
+                                                $('#ses_mail').html(rs.email);
+                                                //alert(rs.id);
+                                                var usertype = rs.user_type;
+                                                if (usertype === 'customer') {
+                                                    // alert("am a customer");
+                                                    // alert(rs.id);
+
+                                                    $('.admin').empty();
+                                                    $('#user_id').val(rs.id);
+                                                    $('#usernav').hide();
+                                                    // $('#user_id').prop('type', 'hidden');
+
+                                                } else {
+                                                    $('#shopnav').hide();
+                                                    // alert("am a admin");
+                                                }
+                                            },
+                                            error: function (){
+                                                alert("Please login");
+                                                window.location.href="index.html";
+                                            }
+                                        });
+
+                                    }
+
+        </script>

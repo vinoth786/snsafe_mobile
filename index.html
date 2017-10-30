@@ -1,0 +1,348 @@
+﻿<!Doctype html>
+<head>
+    <title>snsafe home screen</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="asset/materialize-css/css/materialize.min.css">
+    <link rel="stylesheet" href="asset/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="asset/css/style.css">
+</head>
+<style>
+    i.material-icons.col-light-blue {
+        /*margin-left: 47%;*/
+        text-align: center;
+        animation-duration: 3s;
+        animation-delay: 5s;
+        animation-iteration-count: infinite;
+    }
+
+
+    .content {
+        text-align: center !important;
+    }
+
+    html {
+        height: 100vh !important;
+        color: #fff !important;
+    }
+    .btn {
+        text-transform:none!important;
+    }
+    .row {
+
+    }
+    #product_list .icon {
+        margin-left: 47% !important;
+    }
+</style>
+<body>
+    <div class="btn-wrap">
+        <div class="row">
+            <div class="col s6 sin">
+                <a href="signin.html" class="waves-effect waves-light btn sisu-btn sn-btn">Sign In</a>
+            </div>
+            <div class="col s6 sin">
+                <a href="signin.html" class="waves-effect waves-light btn sisu-btn sp-btn">Sign Up</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col s6 offset-s3 img-wrap">
+            <img class="responsive-img logo-img" src="asset/images/logo.png">
+        </div>
+    </div>
+    <div class="search-bar">
+        <div class="">
+            <form class="col s12">
+                <div class="input-field col s10 offset-s1">
+                    <i class="material-icons prefix">search</i>
+                    <input id="searchdev" type="text" class="validate tagin">
+                    <label for="searchdev">Tag Name</label>
+                </div>
+            </form>
+            <fieldset id="product_list"></fieldset>
+        </div>
+    </div>
+    <div class="modal fade in" id="Contactmodel" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form id="contactForm" autocomplete="off">
+
+                    <div id="product_detail" class="hide">
+                    </div>
+                    <div class="modal-body">
+                        <h4>Finder details</h4>
+                        <br>
+                        <div class="form-group form-float">
+                            <div class="input-field form-line">
+                                <input type="hidden" class="form-control" name="append_id" id="append_id" >
+                                <input type="hidden" class="form-control" name="append_userid" id="append_userid" >
+                                <input type="hidden" class="form-control" name="append_sn" id="append_sn" >
+                                <input type="hidden" class="form-control" name="append_email" id="append_email" >
+                                <input type="text" class="form-control" name="name" id="name" value="" >
+                                <label class="form-label">Name *</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group form-float">
+                            <div class="input-field form-line">
+                                <input type="email" class="form-control" name="email" id="email"  value="">
+                                <label class="form-label">Email-id *</label>
+                            </div>
+                        </div>
+                        <div class="form-group form-float">
+                            <div class="input-field form-line">
+                                <input type="text" class="form-control" name="mobile" id="mobile"  value="">
+                                <label class="form-label">Mobile *</label>
+                            </div>
+                        </div>
+                        <div class="form-group form-float">
+                            <div class="input-field form-line">
+                                <input type="text" class="form-control" name="description" id="description" >
+                                <label class="form-label">Description </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" id="submitContact" class="btn btn-success waves-effect"><span class="material-icons">check</span></button>
+                        <button type="button"   class="btn btn-danger waves-effect" data-dismiss="modal"><span class="material-icons">clear</span></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="asset/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="asset/materialize-css/js/materialize.min.js"></script>
+    <script type="text/javascript" src="asset/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="asset/js/jquery_validation.js"></script>
+    <script type="text/javascript" src="asset/js/sweet_alert.min.js"></script>
+    <script type="text/javascript" src="asset/js/sweetalert_dev.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#searchdev").keyup(function () {
+                if ($(this).val() === '') {
+                    $('#product_list').html("");
+                }
+                $.ajax({
+                    type: "POST",
+                    url: "http://rayi.in/snsafe/dev/General/searchMissingItem/" + $('#searchdev').val(),
+                    dataType: 'json',
+                    success: function (obj) {
+                        $('#product_list').html("");
+                        var sn = [];
+                        if (obj.status === true) {
+                            $('#product_list').html('<div class="info-box-4 hover-zoom-effect">' +
+                                    '<div class="icon">' +
+                                    '<i class="material-icons">thumb_up</i>' +
+                                    '</div>' +
+                                    '<div class="content">' +
+                                    '<div class="text text-center"><strong></strong></div>' +
+                                    '<div class="text text-centerr">SN Safe.</div>' +
+                                    '</div>' +
+                                    '</div>');
+                        } else {
+                            if (obj.length > 0) {
+                                $.each(obj, function (ind, row) {
+
+                                    var mDescription1;
+                                    var mDescription2;
+                                    var mDescription3;
+                                    if (row.secure == '0') {
+                                        if ((row.place == '') && (row.amount == '')) {
+                                            //mDescription2 = 'Reward  ' + row.amount;
+                                            mDescription3 = row.gift_description;
+                                            // mDescription1 = '<?php //echo $this->lang->line('no_description');    ?>';
+                                            $('#product_list').append('<div class="info-box-4 hover-zoom-effect" onclick="viewProduct(' + row.id + ');">' +
+                                                    '<div class="icon">' +
+                                                    '<i class="material-icons col-light-blue">access_alarm</i>' +
+                                                    '</div>' +
+                                                    '<div class="content">' +
+                                                    '<div class="text text-center"><strong> Serial number :' + row.sn_number + '</strong></div>' +
+                                                    '<div class="text text-center"><strong> Product :' + row.product_group + '</strong></div>' +
+                                                    //'<div class="text text-center"> '+ mDescription1 + '</div>' +
+                                                    //'<div class="text text-center">' + mDescription2 + '</div>' +
+                                                    '<div class="text text-center">' + mDescription3 + '</div>' +
+                                                    '</div>' +
+                                                    '</div>');
+                                            sn[ind] = row.sn_number;
+                                        } else if (row.amount == '') {
+                                            mDescription1 = 'Lost place :' + row.place;
+                                            // mDescription2 = 'Reward  '+row.amount;
+                                            mDescription3 = row.gift_description;
+                                            $('#product_list').append('<div class="info-box-4 hover-zoom-effect" onclick="viewProduct(' + row.id + ');">' +
+                                                    '<div class="icon">' +
+                                                    '<i class="material-icons col-light-blue">access_alarm</i>' +
+                                                    '</div>' +
+                                                    '<div class="content">' +
+                                                    '<div class="text text-center"><strong> Serial number :' + row.sn_number + '</strong></div>' +
+                                                    '<div class="text text-center"><strong> Product :' + row.product_group + '</strong></div>' +
+                                                    '<div class="text text-center"> ' + mDescription1 + '</div>' +
+                                                    //'<div class="text text-center">' + mDescription2 + '</div>' +
+                                                    '<div class="text text-center">' + mDescription3 + '</div>' +
+                                                    '</div>' +
+                                                    '</div>');
+                                            sn[ind] = row.sn_number;
+                                        } else if (row.place == '') {
+                                            mDescription2 = 'Reward  :' + row.amount;
+                                            mDescription3 = row.gift_description;
+                                            $('#product_list').append('<div class="info-box-4 hover-zoom-effect" onclick="viewProduct(' + row.id + ');">' +
+                                                    '<div class="icon">' +
+                                                    '<i class="material-icons col-light-blue">access_alarm</i>' +
+                                                    '</div>' +
+                                                    '<div class="content">' +
+                                                    '<div class="text text-center"><strong> Serial number :' + row.sn_number + '</strong></div>' +
+                                                    '<div class="text text-center"><strong> Product :' + row.product_group + '</strong></div>' +
+                                                    // '<div class="text text-center"> ' + mDescription1 + '</div>' +
+                                                    '<div class="text text-center">' + mDescription2 + '</div>' +
+                                                    '<div class="text text-center">' + mDescription3 + '</div>' +
+                                                    '</div>' +
+                                                    '</div>');
+                                            sn[ind] = row.sn_number;
+                                        } else {
+                                            mDescription1 = 'Lost place : ' + row.place;
+                                            mDescription2 = 'Reward  : ' + row.amount;
+                                            mDescription3 = row.gift_description;
+                                            $('#product_list').append('<div class="info-box-4 hover-zoom-effect" onclick="viewProduct(' + row.id + ');">' +
+                                                    '<div class="icon">' +
+                                                    '<i class="material-icons col-light-blue">access_alarm</i>' +
+                                                    '</div>' +
+                                                    '<div class="content">' +
+                                                    '<div class="text text-center"><strong> Serial number : ' + row.sn_number + '</strong></div>' +
+                                                    '<div class="text text-center"><strong> Product : ' + row.product_group + '</strong></div>' +
+                                                    '<div class="text text-center"> ' + mDescription1 + '</div>' +
+                                                    '<div class="text text-center">' + mDescription2 + '</div>' +
+                                                    '<div class="text text-center">' + mDescription3 + '</div>' +
+                                                    '</div>' +
+                                                    '</div>');
+                                            sn[ind] = row.sn_number;
+                                        }
+
+                                    } else {
+                                        if ((row.place == '') && (row.amount == '')) {
+                                            //mDescription2 = 'Reward  ' + row.amount;
+                                            mDescription3 = row.gift_description;
+                                            // mDescription1 = '<?php //echo $this->lang->line('no_description');    ?>';
+                                            $('#product_list').append('<div class="info-box-4 hover-zoom-effect" onclick="viewProduct(' + row.id + ');">' +
+                                                    '<div class="icon">' +
+                                                    '<i class="material-icons col-light-blue">access_alarm</i>' +
+                                                    '</div>' +
+                                                    '<div class="content">' +
+                                                    '<div class="text text-center"><strong> Serial number :' + row.sn_number + '</strong></div>' +
+                                                    '<div class="text text-center"><strong> Yes! This product is missing</strong></div>' +
+                                                    //'<div class="text text-center"> '+ mDescription1 + '</div>' +
+                                                    //'<div class="text text-center">' + mDescription2 + '</div>' +
+                                                    '<div class="text text-center">' + mDescription3 + '</div>' +
+                                                    '</div>' +
+                                                    '</div>');
+                                            sn[ind] = row.sn_number;
+                                        } else if (row.amount == '') {
+                                            mDescription1 = 'Lost place :' + row.place;
+                                            // mDescription2 = 'Reward  '+row.amount;
+                                            mDescription3 = row.gift_description;
+                                            $('#product_list').append('<div class="info-box-4 hover-zoom-effect" onclick="viewProduct(' + row.id + ');">' +
+                                                    '<div class="icon">' +
+                                                    '<i class="material-icons col-light-blue">access_alarm</i>' +
+                                                    '</div>' +
+                                                    '<div class="content">' +
+                                                    '<div class="text text-center"><strong> Serial number :' + row.sn_number + '</strong></div>' +
+                                                    '<div class="text text-center"><strong> Yes! This product is missing</strong></div>' +
+                                                    '<div class="text text-center"> ' + mDescription1 + '</div>' +
+                                                    //'<div class="text text-center">' + mDescription2 + '</div>' +
+                                                    '<div class="text text-center">' + mDescription3 + '</div>' +
+                                                    '</div>' +
+                                                    '</div>');
+                                            sn[ind] = row.sn_number;
+                                        } else if (row.place == '') {
+                                            mDescription2 = 'Reward  :' + row.amount;
+                                            mDescription3 = row.gift_description;
+                                            $('#product_list').append('<div class="info-box-4 hover-zoom-effect" onclick="viewProduct(' + row.id + ');">' +
+                                                    '<div class="icon">' +
+                                                    '<i class="material-icons col-light-blue">access_alarm</i>' +
+                                                    '</div>' +
+                                                    '<div class="content">' +
+                                                    '<div class="text text-center"><strong> Serial number :' + row.sn_number + '</strong></div>' +
+                                                    '<div class="text text-center"><strong>Yes! This product is missing</strong></div>' +
+                                                    // '<div class="text text-center"> ' + mDescription1 + '</div>' +
+                                                    '<div class="text text-center">' + mDescription2 + '</div>' +
+                                                    '<div class="text text-center">' + mDescription3 + '</div>' +
+                                                    '</div>' +
+                                                    '</div>');
+                                            sn[ind] = row.sn_number;
+                                        } else {
+                                            mDescription1 = 'Lost place : ' + row.place;
+                                            mDescription2 = 'Reward  : ' + row.amount;
+                                            mDescription3 = row.gift_description;
+                                            $('#product_list').append('<div class="info-box-4 hover-zoom-effect" onclick="viewProduct(' + row.id + ');">' +
+                                                    '<div class="icon">' +
+                                                    '<i class="material-icons col-light-blue">access_alarm</i>' +
+                                                    '</div>' +
+                                                    '<div class="content">' +
+                                                    '<div class="text text-center"><strong> Serial number : ' + row.sn_number + '</strong></div>' +
+                                                    '<div class="text text-center"><strong>Yes! This product is missing</strong></div>' +
+                                                    '<div class="text text-center"> ' + mDescription1 + '</div>' +
+                                                    '<div class="text text-center">' + mDescription2 + '</div>' +
+                                                    '<div class="text text-center">' + mDescription3 + '</div>' +
+                                                    '</div>' +
+                                                    '</div>');
+                                            sn[ind] = row.sn_number;
+                                        }
+
+                                    }
+                                });
+                            } else {
+                                $('#product_list').html('<div class="info-box-4 hover-zoom-effect">' +
+                                        '<div class="icon">' +
+                                        '<i class="material-icons col-red">error_outline</i>' +
+                                        '</div>' +
+                                        '<div class="content">' +
+                                        '<div class="text text-center">Sorry</div>' +
+                                        '<div class="text text-center">No product found</div>' +
+                                        '</div>' +
+                                        '</div>');
+                            }
+                        }
+                    }
+                });
+                return false;
+            });
+        });
+        function viewProduct(id) {
+            $('#Contactmodel').modal('show');
+            $.ajax({
+                type: "POST",
+                url: "http://rayi.in/snsafe/dev/General/getMissingProdcutDetail/" + id,
+                dataType: 'json',
+                beforeSend: function () {
+                    //                $('#block').show();
+                },
+                success: function (obj) {
+                    obj = obj[0];
+                    var missing;
+                    $('#product_detail').empty();
+                    if (obj.missing_status === 1) {
+                        missing = "Missing";
+                    }
+                    $('#append_email').val(obj.email);
+                    $('#append_id').val(obj.id);
+                    $('#append_userid').val(obj.user_id);
+                    $('#append_sn').val(obj.sn_number);
+                    // var out = '<p><?php echo $this->lang->line('hi_product'); ?>' + obj.sn_number + '<?php echo $this->lang->line('is'); ?>  ' + obj.product_group + ' - ' + obj.brand + '- ' + obj.model + '.<?php echo $this->lang->line('owner_marked'); ?>' + obj.description + '<?php echo $this->lang->line('owner_gift_description'); ?></p>';
+                    //  $('#product_detail').html(out);
+                    checkInput();
+                },
+                complete: function () {
+                    $('#block').hide();
+                },
+                error: function () {
+                    swal('Product', 'Getting error, Try again', 'error');
+                }
+
+            });
+        }
+    </script>
+
+
+</body>

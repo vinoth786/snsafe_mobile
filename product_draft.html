@@ -1,0 +1,566 @@
+﻿<!-- 
+        Author: Sathish Thangaraj
+        Description: Product list for Admin and Customer
+-->
+<!Doctype html>
+<html lang="en">
+
+    <head>
+        <title>snsafe home screen</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="asset/materialize-css/css/materialize.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="asset/css/style.css">
+        <!--<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">-->
+        <link rel="stylesheet" href="asset/bootstrap/css/bootstrap.min.css">
+        <!-- data table css -->
+        <link rel="stylesheet" href="asset/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css">
+        <link rel="stylesheet" href="asset/css/dataTables.responsive.css">
+        <link rel="stylesheet" href="asset/css/sweetalert.css">
+        <link rel="stylesheet" href="asset/css/fancybox.css">
+        <style>
+            html{
+                height: 100vh;
+            }
+            button#AddProduct, button#Addvideo{
+                margin-left: 20%;
+                margin-left: 45%;
+                margin-top: 10px;
+                width: 55px;
+                height: 55px;
+                font-size: 0px;
+                border-radius: 50%;
+            }
+            .fixed-action-btn{top:70px;}
+            div#videoModal {
+    background: transparent;
+}
+
+        </style>
+    </head>
+
+    <body class="product-page">
+        <div class="">
+            <div class="col s12 navbar-fixed nav">
+                <nav>
+                    <div class="nav-wrapper">
+                        <ul id="slide-out" class="side-nav">
+                            <li>
+                                <div class="user-view">
+                                    <div class="user-profile">
+                                        <img class="circle" src="asset/images/profile.png">
+                                        <div class="user-detail">
+                                            <h4 class="white-text" id="ses_name">John Doe</h4>
+                                            <p class="white-text" id="ses_mail">jonedoe@test.com</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <hr>
+                            <!-- <li><a href="#!"><i class="material-icons">cloud</i>First Link With Icon</a></li>
+                            <li><a href="#!">Second Link</a></li>
+                            <li>
+                                <div class="divider"></div>
+                            </li>
+                            <li><a class="subheader">Subheader</a></li>
+                            <li><a class="waves-effect" href="#!">Third Link With Waves</a></li> -->
+                            <div class="nav-links">
+                                <a href="profile.html" class="white-text"><img class="navimg" src="asset/images/user.png" alt=""><span class="navtitle">Profile</span></a>
+                                <a href="product.html" class="white-text"><img class="navimg" src="asset/images/product.png" alt=""><span class="navtitle">Product List</span></a>
+                                <!-- <a href="device.html" class="white-text"><img class="navimg" src="asset/images/device.png" alt=""><span class="navtitle">Devices</span></a> -->
+                                <a href="finder.html" class="white-text"><img class="navimg" src="asset/images/device.png" alt=""><span class="navtitle">Lost and Found</span></a>
+                                <a href="recycle.html" class="white-text"><img class="navimg" src="asset/images/recycle.png" alt=""><span class="navtitle">Recycle</span></a>
+                                <a href="user.html" class="white-text" id="usernav"><img class="navimg" src="asset/images/user.png" alt=""><span class="navtitle">Users</span></a>
+                                <a href="orders.html" class="white-text"><img class="navimg" src="asset/images/product.png" alt=""><span class="navtitle">Order(s)</span></a>
+                                <a href="shop.html" class="white-text" id="shopnav"><img class="navimg" src="asset/images/product.png" alt=""><span class="navtitle">Shop</span></a>
+                                <a href="tagsearch.html" class="white-text"><img class="navimg" src="asset/images/user.png" alt=""><span class="navtitle">Tag Search</span></a>
+                            </div>
+
+                            <hr>
+                            <div class="nav-links">
+                                <a href="" class="white-text"><img class="navimg" src="asset/images/product.png" alt=""><span class="navtitle">Settings</span></a>
+                                <a href="#" class="white-text" onClick="return logout();"><img class="navimg" src="asset/images/device.png" alt=""><span class="navtitle">Logout</span></a>
+                        </ul>
+                        <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
+                        <div class="header">
+                            <h2>Product Draft</h2>
+                        </div>
+                        <ul id="nav-mobile" class="left hide-on-med-and-down">
+                            <li><a href="collapsible.html"><i class="fa fa-cart"></i></a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <div class="se-pre-con"></div>
+        <div class="fixed-action-btn horizontal">
+            <a class="btn-floating btn-large red">
+                <i class="large material-icons">add</i>
+            </a>
+            <ul>
+
+                <li><span>Add product video</span><br><button type="button" class="btn btn-primary waves-effect " id="Addvideo" data-toggle="tooltip" data-placement="top" title="Add product"><span class="material-icons">add</span></button></li>
+                <li><span>Quick-Add Product</span><br><button type="button" class="btn btn-primary waves-effect " id="AddProduct" data-toggle="tooltip" data-placement="top" title="Add product"><span class="material-icons">add</span></button></li>
+            </ul>
+        </div>
+        <!-- model start-->
+        <div class="modal fade in" id="defaultModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <form id="productForm"  autocomplete="off">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="defaultModalLabel">Add product</h4>
+                        </div>
+                        <div class="modal-body">
+                            <br/>
+                            <br/>
+
+                            <div class="customer">
+                                <input type="hidden" value="" id="user_id" name="user_id"/>
+                            </div>
+
+                            <div class="form-group admin">
+                                <label class="form-label">User *</label>
+                                <div class="form-line">
+                                    <select name="user_id" id="user_id" class="form-control show-tick browser-default">
+                                        <option>Select user</option>
+                                    </select>
+
+                                </div>
+                            </div>
+
+
+                            <div class="form-group form-float">
+                                <div class="form-line input-field">
+                                    <input type="text" class="form-control validate"  name="snNumber" id="snNumber">
+                                    <label class="form-label">Product serial number *</label>
+                                    <p id="userErr"></p>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group form-float">
+                                <div class="file_input_div ">
+                                    <div class="file_input">
+                                        <label class="form-label">upload product images</label>&nbsp;<label>
+                                            <i class="material-icons">file_upload</i>
+                                            <input class="none"  name="userFiles[]" id="userFiles" type="file" multiple />
+                                        </label>
+                                        <span id="UploadImgs"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+
+                            <div class="form-group form-float">
+                                <div class="form-line input-field">
+                                    <input type="text" name="description" id="description" class="form-control validate">
+                                    <label class="form-label">Description</label>
+                                </div>
+                            </div>
+                            <br>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" id="submitProduct" class="btn btn-success waves-effect"><span class="material-icons">check</span></button>
+                            <button type="button"   class="btn btn-danger waves-effect" data-dismiss="modal"><span class="material-icons">clear</span></button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="videoModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <form id="videoForm"  autocomplete="off">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="videoModalLabel">Add product</h4>
+                        </div>
+                        <div class="modal-body">
+                            <br/>
+                            <br/>
+
+                            <div class="customer">
+                                <input type="hidden" value="" id="v_user_id" name="user_id"/>
+                            </div>
+
+<!--                            <div class="form-group admin hide">
+                                <label class="form-label">User *</label>
+                                <div class="form-line">
+                                    <select name="v_user_id" id="v_user_id" class="form-control show-tick browser-default">
+                                        <option>Select user</option>
+                                    </select>
+
+                                </div>
+                            </div>-->
+
+                            <div class="form-group form-float">
+                                <div class="file_input_div ">
+                                    <div class="file_input">
+                                        <label class="form-label">upload product video</label>&nbsp;<label>
+                                            <i class="material-icons">file_upload</i>
+                                            <input type="file" name="pic" accept="video/*" id="video_product">
+                                        </label>
+                                        <span id="uploadVideo"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" id="submitvideo" class="btn btn-success waves-effect"><span class="material-icons">check</span></button>
+                            <button type="button"   class="btn btn-danger waves-effect" data-dismiss="modal"><span class="material-icons">clear</span></button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript" src="asset/js/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="asset/materialize-css/js/materialize.min.js"></script>
+        <script type="text/javascript" src="asset/bootstrap/js/bootstrap.min.js"></script>
+        <!-- Jquery data table plugin-->
+        <script type="text/javascript" src="asset/plugins/jquery-datatable/jquery.dataTables.js"></script>
+        <script type="text/javascript" src="asset/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
+        <script type="text/javascript" src="asset/js/dataTables.responsive.js"></script>
+        <script type="text/javascript" src="asset/js/jquery_validation.js"></script>
+        <script type="text/javascript" src="asset/js/sweet_alert.min.js"></script>
+        <script type="text/javascript" src="asset/js/sweetalert_dev.js"></script>
+        <script type="text/javascript" src="asset/js/global.js"></script>
+        <script type="text/javascript" src="asset/js/fancybox.js"></script>
+
+        <script>
+
+                                    $(window).on('load', function () {
+                                        // Animate loader off screen
+                                        $(".se-pre-con").delay(3000).show().fadeOut("slow");
+                                    });
+                                    //side nav bar initialization (never remove this)
+                                    $(".button-collapse").sideNav();
+
+
+                                    $(document).ready(function () {
+                                        $('select').material_select();
+                                        // getProductgroup();
+                                        getUserData();
+                                        getSelectUser();
+                                        //Upload product images preview
+                                        $('#userFiles').change(function () {
+                                            $('#UploadImgs').empty();
+                                            imagesPreview(this, '#UploadImgs');
+                                        });
+
+                                        $('#AddProduct').click(function () {
+                                            // $('#user_id,#usedType,#sel_p_group').selectpicker('refresh');
+                                            $('.hideme').hide();
+                                            $('#id').val('');
+                                            $('#updateV').val('');
+                                            $('#user_id option').attr('disabled', false);
+                                            $('#user_id option').attr("selected", false);
+                                            $('#userErr').empty(); // SN number error message clear
+                                            $('#defaultModalLabel').text('Add product'); // Model popup title set
+                                            var vali = $('#productForm').validate();
+                                            vali.resetForm(); //Form all field validation reset
+                                            $('#UploadImgs').empty();
+                                            $('#productForm')[0].reset(); //Form all field reset
+
+                                            $('#defaultModal').modal('show'); // Model form show
+
+                                            $('#snNumber').focus();
+                                            $(".error").removeClass("error");
+                                        });
+
+                                        var table = $('#table').DataTable({
+                                            ajax: {
+                                                url: 'http://rayi.in/snsafe/dev/Product/getProduct',
+                                                type: 'POST',
+                                                dataType: 'json'
+                                            },
+                                            "columnDefs": [{
+                                                    "searchable": false,
+                                                    "orderable": false,
+                                                    "targets": 0
+                                                }],
+                                            dom: '<"pull-left"f><"pull-right"l>trip',
+                                            responsive: true,
+                                            processing: true,
+                                            info: false,
+                                            lengthChange: false,
+                                            // serverSide: true,
+                                            "order": [[1, 'asc']]
+                                        });
+
+                                        table.on('order.dt search.dt', function () {
+                                            table.column(0, {search: 'applied', order: 'applied'}).nodes().each(function (cell, i) {
+                                                cell.innerHTML = i + 1;
+                                            });
+                                        }).draw();
+                                    });
+                                    //Add Product from validation
+                                    $('#productForm').validate({
+                                        rules: {
+                                            user_id: {
+                                                required: true
+                                            },
+                                            snNumber: {
+                                                required: true
+                                            }
+                                        },
+                                        highlight: function (input) {
+                                            $(input).parents('.form-line').addClass('error');
+                                        },
+                                        unhighlight: function (input) {
+                                            $(input).parents('.form-line').removeClass('error');
+                                        },
+                                        errorPlacement: function (error, element) {
+                                            $(element).parents('.form-group').append(error);
+                                        },
+                                        messages: {
+                                            user_id: {
+                                                required: 'Select user'
+                                            },
+                                            snNumber: {
+                                                required: 'Please enter your product serial number'
+                                            }
+                                        },
+                                        submitHandler: function () {
+                                            $('#submitProduct').prop('disabled', true);
+                                            if ($('#updateV').val() === 'update') {
+                                                update();
+                                            } else {
+                                                addproduct();
+                                            }
+                                        }
+                                    });
+
+                                    var imagesPreview = function (input, placeToInsertImagePreview) {
+                                        if (input.files) {
+                                            var filesAmount = input.files.length;
+                                            for (i = 0; i < filesAmount; i++) {
+                                                var reader = new FileReader();
+                                                var filesize = input.files[i].size;
+                                                if (filesize < 1024000) {
+                                                    reader.onload = function (event) {
+                                                        $($.parseHTML('<img with="40" height="40">')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
+                                                    }
+                                                    reader.readAsDataURL(input.files[i]);
+                                                } else {
+                                                    swal('Image upload', 'File size should not be more than 1 MB', 'error');
+                                                }
+                                            }
+                                        }
+                                    };
+                                    //Product add 
+                                    function addproduct() {
+                                        $('#UploadImgs').empty();
+                                        var formdata = new FormData($('#productForm')[0]);
+                                        $.ajax({
+                                            url: "http://rayi.in/snsafe/dev/mobileapi/Mobile/logout",
+                                            type: "POST",
+                                            data: formdata,
+                                            contentType: false,
+                                            processData: false,
+                                            dataType: "JSON",
+                                            beforeSend: function () {
+                                                $('#block').show();
+                                                $('#submitProduct').prop('disabled', true);
+                                            },
+                                            success: function (rs) {
+                                                if (rs.status === true) {
+                                                    $('#productForm')[0].reset();
+                                                    $('#submitProduct').prop('disabled', false);
+                                                    $('#defaultModal').modal('hide');
+                                                    //ajax_dataTable_reload();
+                                                    //table.ajax.reload();
+                                                    swal('Product added successfully', '', 'success');
+                                                    //window.location.href = "product.html";
+                                                }
+                                            },
+                                            error: function () {
+                                                swal('Add product', 'Error an add product', 'error');
+                                            },
+                                            complete: function () {
+                                                $('#block').hide();
+                                                $('#submitProduct').prop('disabled', false);
+                                            }
+                                        });
+                                    }
+                                    //Product Update
+                                    function update() {
+
+                                        var url = "http://rayi.in/snsafe/dev/mobileapi/Mobile/logout";
+                                        var formData = new FormData($('#productForm')[0]);
+                                        $.ajax({
+                                            url: url,
+                                            type: "POST",
+                                            data: formData,
+                                            contentType: false,
+                                            processData: false,
+                                            dataType: "JSON",
+                                            beforeSend: function () {
+                                                $('#block').show();
+                                                $('#submitProduct').prop('disabled', true);
+                                            },
+                                            success: function (rs)
+                                            {
+                                                if (rs.status === true) {
+                                                    $('#defaultModal').modal('hide');
+                                                    $('#submitProduct').prop('disabled', false);
+                                                    //ajax_dataTable_reload();
+                                                    //table.ajax.reload();
+                                                    swal('Product updated successfully', '', 'success');
+                                                    //window.location.href = "product.html";
+                                                }
+                                            },
+                                            error: function ()
+                                            {
+                                                swal('Product update', 'Error an update a product', 'error');
+                                            },
+                                            complete: function () {
+                                                $('#block').hide();
+                                                $('#submitProduct').prop('disabled', false);
+                                            }
+                                        });
+                                    }
+
+
+                                    //Edit product
+                                    function edit_product(id) {
+                                        //        getProductgroup();
+                                        $('.hideme').hide();
+                                        $('#defaultModalLabel').text('Edit Product');
+                                        // $('#user_id,#usedType').selectpicker('refresh');
+                                        var vali = $('#productForm').validate();
+                                        vali.resetForm();
+                                        $('#defaultModal').modal('show');
+                                        $('#UploadImgs').empty();
+                                        $('#id').val(id);
+                                        $('#userErr').empty().html('');
+                                        $('#updateV').val('update');
+                                        $('#submitProduct').attr("disabled", false);
+                                        //        $('#snNumber').prop('readonly', true);
+                                        $('#productForm')[0].reset();
+                                        $('#user_id option').attr("selected", false);
+                                        $(".error").removeClass("error");
+                                        $.ajax({
+                                            url: "http://rayi.in/snsafe/dev/Product/editProduct/" + id,
+                                            type: "GET",
+                                            dataType: "JSON",
+                                            success: function (data)
+                                            {
+                                                //                $('#user_id option').attr('disabled', 'disabled');
+                                                $('#user_id option[value=' + data[0][0].user_id + ']').prop('selected', true);
+                                                //                $('#user_id option[value=' + data[0][0].user_id + ']').attr('disabled', false);
+                                                $('#id').val(data[0][0].id);
+                                                //                $('#productGroup').val(data[0][0].product_group);
+                                                $('#brand').val(data[0][0].brand);
+                                                $('#model').val(data[0][0].model);
+                                                $('#snNumber').val(data[0][0].sn_number);
+                                                $('#altModelNo').val(data[0][0].alt_model_no);
+                                                $('#description').val(data[0][0].description);
+                                                $('#gift_description').val(data[0][0].gift_description);
+                                                $('#dateBought').val(data[0][0].date_bought);
+                                                $('#warrantyExpires').val(data[0][0].warranty_expires);
+                                                $('#usedType').val(data[0][0].used_type);
+                                                $('#buyingPrice').val(data[0][0].buying_price);
+                                                $('#whereBought').val(data[0][0].where_bought);
+                                                $('#product_status').val(data[0][0].missing_status);
+                                                $('#sel_p_group option[value="' + data[0][0].product_group + '"]').prop('selected', true);
+                                                if (data[0][0].secure === '1') {
+                                                    $('#secure').prop('checked', true);
+                                                } else {
+                                                    $('#secure').prop('checked', false);
+                                                }
+                                                $('#UploadImg').empty().html('<img alt="file missed" src="' + 'http://rayi.in/snsafe/dev/' + data[0][0].receipt + '" width=40px height=40 />');
+                                                // $('#usedType,#user_id,#sel_p_group').selectpicker('refresh');
+                                                $('#UploadImgs').empty();
+                                                $.each(data['images'], function (ind, row) {
+                                                    $('#UploadImgs').append('<img alt="file missed" src="' + ' http://rayi.in/snsafe/dev/' + row.img_url + '" width=40px height=40 />')
+                                                });
+                                                checkInput();
+                                                $('label').addClass('active');
+                                            },
+                                            error: function ()
+                                            {
+                                                swal('Error', 'Error get data from ajax', 'error');
+                                            }
+                                        });
+                                    }
+
+                                    function getSelectUser() {
+                                        $('select#user_id').empty().html('<option value="">Select user</option>');
+                                        $.ajax({
+                                            url: 'http://rayi.in/snsafe/dev/user/getUserList',
+                                            type: 'GET',
+                                            dataType: 'json',
+                                            success: function (rs) {
+                                                if (rs.status === true) {
+                                                    $.each(rs.data, function (ind, row) {
+                                                        $('select#user_id').append('<option value="' + row.id + '">' + row.username + '</option>');
+                                                    });
+                                                    // $('#user_id').selectpicker('refresh');
+                                                }
+                                            }
+                                        });
+                                    }
+
+                                    function getUserData() {
+
+                                        $.ajax({
+                                            url: 'http://rayi.in/snsafe/dev/mobileapi/Mobile/getSession',
+                                            type: 'POST',
+                                            dataType: 'json',
+                                            success: function (rs) {
+
+                                                $('#ses_name').html(rs.username);
+                                                $('#ses_mail').html(rs.email);
+                                                //alert(rs.id);
+                                                var usertype = rs.user_type;
+                                                if (usertype === 'customer') {
+                                                    // alert("am a customer");
+                                                    // alert(rs.id);
+
+                                                    $('.admin').empty();
+                                                    $('#user_id').val(rs.id);
+                                                    $('#usernav').hide();
+                                                    // $('#user_id').prop('type', 'hidden');
+
+                                                } else {
+                                                    $('.customer').empty();
+                                                    $('#shopnav').hide();
+                                                    // alert("am a admin");
+                                                }
+                                            },
+                                            error: function () {
+                                                alert("Please login");
+                                                window.location.href = "index.html";
+                                            }
+                                        });
+                                    }
+                                    function logout() {
+
+                                        $.ajax({
+                                            type: "POST",
+                                            url: "http://rayi.in/snsafe/dev/mobileapi/Mobile/logout",
+                                            dataType: 'json',
+                                            complete: function () {
+                                                window.location.href = "index.html";
+                                            }
+                                        });
+                                    }
+                                    
+                                        $('#Addvideo').click(function () {
+                                         $('#videoModal').modal('show');
+                                    });
+
+        </script>
+
+    </body>
+</html>
