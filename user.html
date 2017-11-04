@@ -22,7 +22,16 @@ Description: User list for Admin
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
         <style>
+.user-page span.dtr-title {
+    width: 43% !important;
+}
 
+.user-page span.dtr-data {
+    width: 53% !important;
+}
+.form-group select {
+    background: transparent !important;
+}
         </style>
     </head>
 
@@ -54,6 +63,7 @@ Description: User list for Admin
                             <div class="nav-links">
                                 <a href="profile.html" class="white-text"><img class="navimg" src="asset/images/user.png" alt=""><span class="navtitle">Profile</span></a>
                                 <a href="product.html" class="white-text"><img class="navimg" src="asset/images/product.png" alt=""><span class="navtitle">Product List</span></a>
+                                <a href="product_draft.html" class="white-text"><img class="navimg" src="asset/images/product.png" alt=""><span class="navtitle">Product Draft</span></a>
                                 <!--<a href="device.html" class="white-text"><img class="navimg" src="asset/images/device.png" alt=""><span class="navtitle">Devices</span></a>-->
                                 <a href="finder.html" class="white-text"><img class="navimg" src="asset/images/device.png" alt=""><span class="navtitle">Lost and Found</span></a>
                                 <a href="recycle.html" class="white-text"><img class="navimg" src="asset/images/recycle.png" alt=""><span class="navtitle">Recycle</span></a>
@@ -126,6 +136,7 @@ Description: User list for Admin
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <form id="signupForm">
+                            <input type="hidden" id="id" name="id" value="">
                             <div class="modal-header">
                                 <h4 class="modal-title" id="defaultModalLabel">Add user</h4>
                             </div>
@@ -166,7 +177,7 @@ Description: User list for Admin
                                     </div>
                                 </div>
                                 <div class="form-group form-float">
-                                    <div class="input-field ">
+                                    <div class="">
                                         <input name="gender" type="radio" class="with-gap" id="male" value="male" />
                                         <label for="male">Male</label>
                                         <input name="gender" type="radio" id="female" class="with-gap" value="female" />
@@ -618,8 +629,15 @@ Description: User list for Admin
 //                                                            if (uri !== 'Profile' && uType === 'admin') {
 //                                                                table.ajax.reload();
 //                                                            }
-                                                            swal('registered successfully', '', 'success');
-                                                            window.location.href = "user.html";
+                                                            // swal('registered successfully', '', 'success');
+                                                            // window.location.href = "user.html";
+                                                            swal({
+                                                                title: "registered successfully!",
+                                                                text: "",
+                                                                type: "success"
+                                                            }, function () {
+                                                                window.location.href = "user.html";
+                                                            });
                                                         }
                                                     },
                                                     error: function () {
@@ -657,17 +675,24 @@ Description: User list for Admin
 //                                                                ajax_dataTable_reload();
 //                                                                $('#signupModal').modal('hide');
 //                                                            }
-                                                            table.ajax.reload();
+                                                            //table.ajax.reload();
                                                             $('input,#country,#state,#language,textarea').each(function () {
                                                                 $(this).attr('disabled', true);
-                                                                swal('updated successfully', '', 'success');
+                                                                //swal('updated successfully', '', 'success');
                                                                 //ajax_dataTable_reload();
-                                                                table.ajax.reload();
+                                                                //table.ajax.reload();
                                                                 // window.location.href = "user.html";
+                                                                swal({
+                                                                    title: "updated successfully!",
+                                                                    text: "",
+                                                                    type: "success"
+                                                                }, function () {
+                                                                    window.location.href = "user.html";
+                                                                });
                                                             });
-                                                            if (uri !== 'Profile' && uType === 'admin') {
-                                                                table.ajax.reload();
-                                                            }
+//                                                            if (uri !== 'Profile' && uType === 'admin') {
+//                                                                table.ajax.reload();
+//                                                            }
                                                         } else {
                                                             swal('update profile', 'error an update', 'error');
                                                         }
@@ -719,9 +744,16 @@ Description: User list for Admin
                                                                         //if success reload ajax table
                                                                         $('#signupModal').modal('hide');
                                                                         // ajax_dataTable_reload();
-                                                                        table.ajax.reload();
-                                                                        swal('Delete', 'success', 'success');
-                                                                        window.location.href = "user.html";
+                                                                        //table.ajax.reload();
+                                                                        // swal('Delete', 'success', 'success');
+                                                                        // window.location.href = "user.html";
+                                                                        swal({
+                                                                            title: "Deleted successfully!",
+                                                                            text: "",
+                                                                            type: "success"
+                                                                        }, function () {
+                                                                            window.location.href = "user.html";
+                                                                        });
                                                                     },
                                                                     error: function ()
                                                                     {
@@ -734,6 +766,7 @@ Description: User list for Admin
                                                         });
                                             }
                                             function edit_user(id, type) {
+                                                $('#id').val(id);
                                                 $(".update_user").removeClass('hide').off("*");
                                                 $('.add_user').addClass('hide');
                                                 //$('#defaultModalLabel').html("Edit user");

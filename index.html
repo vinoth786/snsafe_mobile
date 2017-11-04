@@ -342,6 +342,90 @@
 
             });
         }
+        //validation for finder contact form
+        $('#contactForm').validate({
+            rules: {
+                name: {
+                    required: true
+                },
+                email: {
+                    required: {
+                        depends: function () {
+                            $(this).val($.trim($(this).val()));
+                            return true;
+                        }
+                    },
+                    email: true
+                },
+                mobile: {
+                    required: {
+                        depends: function () {
+                            $(this).val($.trim($(this).val()));
+                            return true;
+                        },
+//                    symbol: true
+
+                    },
+                    number: true
+                }
+            },
+            highlight: function (input) {
+                $(input).parents('.form-line').addClass('error');
+            },
+            unhighlight: function (input) {
+                $(input).parents('.form-line').removeClass('error');
+            },
+            errorPlacement: function (error, element) {
+                $(element).parents('.form-group').append(error);
+            },
+            messages: {
+                name: {
+                    required: 'please enter your name'
+                },
+                email: {
+                    required: 'Please enter your email',
+                    email: 'Invalid email'
+                },
+                mobile: {
+                    required: 'Please enter your mobile number',
+                    number: 'Provide number only'
+                }
+            },
+            submitHandler: function () {
+                var formdata = new FormData($('#contactForm')[0]);
+                var url;
+                url = "http://rayi.in/snsafe/dev/General/tagFinderDetail";//Get finder's contact details
+                $.ajax({
+                    url: url,
+                    type: "POST",
+                    data: formdata,
+                    contentType: false,
+                    processData: false,
+                    dataType: "json",
+                    beforeSend: function () {
+                        $('#block').show();
+                        $('#submitContact').prop('disabled', true);
+                    },
+                    success: function (rs) {
+                        if (rs.status === true) {
+                            $('#contactForm')[0].reset();
+                            $('#Contactmodel').modal('hide');
+                        }
+                        $('#product_list').html("");
+                        // $("#searchdev").val('');
+                        //getNotification();
+                        swal('thank u', 'Your coontact details shared to owner', 'success');
+                    },
+                    error: function () {
+                        swal('Contact', 'error to share contact details', 'error');
+                    },
+                    complete: function () {
+                        $('#block').hide();
+                        $('#submitContact').prop('disabled', false);
+                    }
+                });
+            }
+        });
     </script>
 
 

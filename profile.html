@@ -21,7 +21,9 @@
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
         <style>
-
+.form-group select {
+    background: transparent !important;
+}
         </style>
     </head>
 
@@ -53,6 +55,7 @@
                             <div class="nav-links">
                                 <a href="profile.html" class="white-text"><img class="navimg" src="asset/images/user.png" alt=""><span class="navtitle">Profile</span></a>
                                 <a href="product.html" class="white-text"><img class="navimg" src="asset/images/product.png" alt=""><span class="navtitle">Product List</span></a>
+                                <a href="product_draft.html" class="white-text"><img class="navimg" src="asset/images/product.png" alt=""><span class="navtitle">Product Draft</span></a>
                                 <!--<a href="device.html" class="white-text"><img class="navimg" src="asset/images/device.png" alt=""><span class="navtitle">Devices</span></a>-->
                                 <a href="finder.html" class="white-text"><img class="navimg" src="asset/images/device.png" alt=""><span class="navtitle">Lost and Found</span></a>
                                 <a href="recycle.html" class="white-text"><img class="navimg" src="asset/images/recycle.png" alt=""><span class="navtitle">Recycle</span></a>
@@ -84,7 +87,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <form id="signupForm">
-
+                    <input type="hidden" id="id" name="id" value="">
                     <div class="modal-body">
                         <div class="form-group form-float">
                             <div class="form-line input-field">
@@ -122,7 +125,7 @@
                             </div>
                         </div>
                         <div class="form-group form-float">
-                            <div class="input-field ">
+                            <div class="">
                                 <input name="gender" type="radio" class="with-gap" id="male" value="male" />
                                 <label for="male">Male</label>
                                 <input name="gender" type="radio" id="female" class="with-gap" value="female" />
@@ -598,7 +601,7 @@
                                     function edit_user(id, type) {
                                         $(".update_user").removeClass('hide').off("*");
                                         $('.add_user').addClass('hide');
-
+                                           $('#id').val(id);
                                         enableFormValues();
                                         if (type === 'customer') {
                                             $('#signupModal').modal('show');
