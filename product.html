@@ -1,4 +1,4 @@
-﻿﻿﻿<!-- 
+﻿﻿<!-- 
         Author: Sathish Thangaraj
         Description: Product list for Admin and Customer
 -->
@@ -205,8 +205,6 @@
                 document.querySelector("#videoArea").innerHTML = v;
                 console.log(s[0].fullPath);
                 document.getElementById("videoSource").value = s[0].fullPath;
-                 console.log(s[0].name);
-                document.getElementById("videoSource").value = s[0].name;
                // document.getElementById("videoSource").name = s[0].fullPath;
                 console.log(s[0].name);
                 $('#videoSource').val(s[0].name);
@@ -607,9 +605,8 @@
                                         <label>
                                             <i class="material-icons video_library">video_library</i>&nbsp;&nbsp;
                                             <input class="none" type="file" id="videoSource" name="pic" accept="video/*">
-                                            <i class="material-icons switch_video" id="takeVideo">
                                         </label>
-                                        <!--<i class="material-icons switch_video" id="takeVideo">-->switch_video</i>
+                                        <i class="material-icons switch_video" id="takeVideo">switch_video</i>
                                         <span id="uploadvideo"></span>
                                         <div id="videoArea"></div>
                                     </div>

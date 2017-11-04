@@ -271,7 +271,7 @@
                                     <!--                                    <span class="input-group-addon">
                                                                             <span class="glyphicon glyphicon-calendar warranty_date"></span>
                                                                         </span>-->
-                                    <label class="form-label z-index">warenty expires</label>
+                                    <label class="form-label z-index">warranty expires</label>
                                 </div>
                             </div>
                             <div class="form-group q">
@@ -333,7 +333,7 @@
                             <input type="hidden" name="verify_product"  id="verify_product" value="1">
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" id="submitProduct" class="btn btn-success waves-effect"><span class="material-icons">check</span></button>
+                            <button type="submit" id="submitProduct" class="btn btn-success waves-effect"><span class="material-icons">check</span></button>&nbsp;&nbsp;
                             <button type="button"   class="btn btn-danger waves-effect" data-dismiss="modal"><span class="material-icons">clear</span></button>
                         </div>
 
@@ -578,7 +578,7 @@
                                             for (i = 0; i < filesAmount; i++) {
                                                 var reader = new FileReader();
                                                 var filesize = input.files[i].size;
-                                                if (filesize < 1024000) {
+                                                if (filesize < 5242880) {
                                                     reader.onload = function (event) {
                                                         $($.parseHTML('<img with="40" height="40">')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
                                                     }
